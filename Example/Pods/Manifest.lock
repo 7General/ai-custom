@@ -1,16 +1,24 @@
 PODS:
-  - MSCustomAi (0.1.0)
+  - MSCustomAi (1.0.0):
+    - SwiftTheme
+  - SwiftTheme (0.6.4)
 
 DEPENDENCIES:
   - MSCustomAi (from `../`)
+  - SwiftTheme
+
+SPEC REPOS:
+  trunk:
+    - SwiftTheme
 
 EXTERNAL SOURCES:
   MSCustomAi:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MSCustomAi: 0c2d7aa9c6bbf8e41d503627e4e9a474aab1690f
+  MSCustomAi: 5e89c00f111b58fb91d6213a8caf3de222b478ce
+  SwiftTheme: 007cbaf1f9e171caf6448a4657533e54c682b285
 
-PODFILE CHECKSUM: 87e9022cd96ebc6b69fc1a284da0ad318f7fcde3
+PODFILE CHECKSUM: ce41c3260bfdfef6e13222116675be4dfc2d206f
 
 COCOAPODS: 1.14.3

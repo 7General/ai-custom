@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_MSCustomAi_TestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_MSCustomAi_TestsVersionString[];
+FOUNDATION_EXPORT double SwiftThemeVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftThemeVersionString[];
 

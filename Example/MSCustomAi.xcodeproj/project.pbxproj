@@ -14,7 +14,6 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		7B28D470C4B77BB1079DBBD1 /* Pods_MSCustomAi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0F7ED4F7A72B36A55345F89 /* Pods_MSCustomAi_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,11 +41,8 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		BC1C0485558EB5DAF085343B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		BDAF7E6C00F6410CFB5869B4 /* MSCustomAi.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MSCustomAi.podspec; path = ../MSCustomAi.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		C6207EF96B35848189E03514 /* Pods-MSCustomAi_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSCustomAi_Tests.release.xcconfig"; path = "Target Support Files/Pods-MSCustomAi_Tests/Pods-MSCustomAi_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		C82CF4F40EA8D5D66D480690 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		D0F7ED4F7A72B36A55345F89 /* Pods_MSCustomAi_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MSCustomAi_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D18FECC5A8432E5C5356A99B /* Pods-MSCustomAi_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSCustomAi_Example.debug.xcconfig"; path = "Target Support Files/Pods-MSCustomAi_Example/Pods-MSCustomAi_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		EA2364BBB85EDB44E79AF455 /* Pods-MSCustomAi_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MSCustomAi_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MSCustomAi_Tests/Pods-MSCustomAi_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B28D470C4B77BB1079DBBD1 /* Pods_MSCustomAi_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +69,6 @@
 			children = (
 				D18FECC5A8432E5C5356A99B /* Pods-MSCustomAi_Example.debug.xcconfig */,
 				0EFB9BE6361969E295844EFD /* Pods-MSCustomAi_Example.release.xcconfig */,
-				EA2364BBB85EDB44E79AF455 /* Pods-MSCustomAi_Tests.debug.xcconfig */,
-				C6207EF96B35848189E03514 /* Pods-MSCustomAi_Tests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -154,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				20F0D558CB775CF8D0705E77 /* Pods_MSCustomAi_Example.framework */,
-				D0F7ED4F7A72B36A55345F89 /* Pods_MSCustomAi_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -170,7 +162,7 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				A67104315D2AC22F4DF64680 /* [CP] Embed Pods Frameworks */,
+				F8BF50256C6E1C866AFB8821 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,7 +177,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "MSCustomAi_Tests" */;
 			buildPhases = (
-				DC968D5D1E9A9F3169DF8A78 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -266,24 +257,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A67104315D2AC22F4DF64680 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MSCustomAi_Example/Pods-MSCustomAi_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/MSCustomAi/MSCustomAi.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSCustomAi.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MSCustomAi_Example/Pods-MSCustomAi_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AED17C142FCF4E602891573D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,26 +279,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC968D5D1E9A9F3169DF8A78 /* [CP] Check Pods Manifest.lock */ = {
+		F8BF50256C6E1C866AFB8821 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${PODS_ROOT}/Target Support Files/Pods-MSCustomAi_Example/Pods-MSCustomAi_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/MSCustomAi/MSCustomAi.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftTheme/SwiftTheme.framework",
 			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MSCustomAi_Tests-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MSCustomAi.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftTheme.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MSCustomAi_Example/Pods-MSCustomAi_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -519,7 +490,6 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA2364BBB85EDB44E79AF455 /* Pods-MSCustomAi_Tests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
@@ -546,7 +516,6 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6207EF96B35848189E03514 /* Pods-MSCustomAi_Tests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
