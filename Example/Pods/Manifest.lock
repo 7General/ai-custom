@@ -1,0 +1,16 @@
+PODS:
+  - MSCustomAi (0.1.0)
+
+DEPENDENCIES:
+  - MSCustomAi (from `../`)
+
+EXTERNAL SOURCES:
+  MSCustomAi:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MSCustomAi: 0c2d7aa9c6bbf8e41d503627e4e9a474aab1690f
+
+PODFILE CHECKSUM: 87e9022cd96ebc6b69fc1a284da0ad318f7fcde3
+
+COCOAPODS: 1.14.3

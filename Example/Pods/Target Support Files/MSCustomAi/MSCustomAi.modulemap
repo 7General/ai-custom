@@ -1,0 +1,6 @@
+framework module MSCustomAi {
+  umbrella header "MSCustomAi-umbrella.h"
+
+  export *
+  module * { export * }
+}

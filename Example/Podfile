@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'MSCustomAi_Example' do
+  pod 'MSCustomAi', :path => '../'
+
+  target 'MSCustomAi_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

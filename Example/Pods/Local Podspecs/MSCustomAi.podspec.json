@@ -1,0 +1,22 @@
+{
+  "name": "MSCustomAi",
+  "version": "0.1.0",
+  "summary": "A short description of MSCustomAi.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/huizhou.wang/MSCustomAi",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "huizhou.wang": "wanghuizhou21@163.com"
+  },
+  "source": {
+    "git": "https://github.com/huizhou.wang/MSCustomAi.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "MSCustomAi/Classes/**/*"
+}
