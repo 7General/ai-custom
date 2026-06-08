@@ -17,6 +17,7 @@ MSCustomAi/                          ← Repository root
 │   ├── Assets/                      ← Reserved for bundled resources (images, JSON, etc.)
 │   │   └── .gitkeep                 ← Placeholder so Git tracks the empty directory
 │   └── Classes/                     ← All Swift source files live here
+│       └── .zread                   ← all wiki
 │       └── MSUtils/                 ← Single namespace grouping all utility modules
 │           ├── tools/               ← Concrete classes and helpers
 │           │   ├── MSThemeHelper.swift
