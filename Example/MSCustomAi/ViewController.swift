@@ -8,42 +8,46 @@
 
 import UIKit
 import SwiftTheme
+import SnapKit
 
 class ViewController: UIViewController {
 
-var _tt = "ddd"
-var ___tt2 = "666"
+    private let dataCount = 10
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.addSubview(titleLabel)
-        titleLabel.frame = CGRect(x: 20, y: 100, width: 200, height: 44)
+        tableView.register(OPBIndexCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Hello"
-        label.theme_textColor = MSThemeHelper.mainColor
-        return label
-    }()
-
-    func __t() {
-
-    }
-
-    func __t2() {
-        
-    }
-
-    lazy var containerView: UIView = {
-        let itssss = UIView()
-        
-        return itssss
+    private lazy var tableView: UITableView = {
+        let it = UITableView()
+        it.delegate = self
+        it.dataSource = self
+        it.theme_backgroundColor = ThemeColorPicker(colors: "#FFFFFFFF", "#00000073")
+        return it
     }()
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+
+}
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataCount
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OPBIndexCell
+        cell.configure(index: indexPath.row)
+        return cell
     }
 
 }
