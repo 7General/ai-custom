@@ -10,14 +10,14 @@ import SwiftTheme
 class OPBIndexView: UIView {
 
     var indexLabel: UILabel = UILabel()
-
+// 9999------
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
         setupLayout()
         setupStyle()
     }
-// 99990000000
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
