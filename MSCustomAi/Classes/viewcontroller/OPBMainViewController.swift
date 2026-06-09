@@ -31,20 +31,45 @@ public class OPBMainViewController: OPBUIViewController {
 extension OPBMainViewController {
 
     func setupUI() {
-        view.addSubview(titleLabel)
+
+        view.addSubview(descLabel)
+        view.addSubview(calculateFeeButton)
     }
 
     func setupLayout() {
-        titleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+
+        descLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(24)
+            make.leading.trailing.equalToSuperview().inset(24)
+        }
+
+        calculateFeeButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(48)
         }
     }
 
-    func setupAction() {}
+    func setupAction() {
+        calculateFeeButton.addTarget(self, action: #selector(didTapCalculateFee), for: .touchUpInside)
+    }
 
     func setupStyle() {
-        view.theme_backgroundColor = OPBThemeHelper.backgroundColorPicker()
-        titleLabel.theme_textColor = OPBThemeHelper.titleColorPicker()
+        
+    }
+
+    @objc private func didTapCalculateFee() {
+        let request = OPBCalculateFeeRequest()
+        // TODO: 填入实际参数
+        request.scanId = ""
+        request.orderAmount = ""
+        OPBNetworkManager.shared.send(request) { (response: OPBCalculateFeeResponse?, error) in
+            if let error = error {
+                debugPrint("calculateFee error: \(error)")
+                return
+            }
+            debugPrint("calculateFee response: \(String(describing: response))")
+        }
     }
 
 }
@@ -53,11 +78,23 @@ extension OPBMainViewController {
 
 extension OPBMainViewController {
 
-    private lazy var titleLabel: UILabel = {
+   
+
+    
+
+    private lazy var descLabel: UILabel = {
         let it = UILabel()
-        it.text = "MSCustomAi"
-        it.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        it.textAlignment = .center
+        it.font = UIFont.systemFont(ofSize: 14)
+        it.theme_textColor = MSThemeHelper.blackTheme65
+        return it
+    }()
+
+    private lazy var calculateFeeButton: UIButton = {
+        let it = UIButton(type: .system)
+        it.setTitle("计算税费", for: .normal)
+        it.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        it.setTitleColor(.white, for: .normal)
+        it.layer.cornerRadius = 8
         return it
     }()
 
