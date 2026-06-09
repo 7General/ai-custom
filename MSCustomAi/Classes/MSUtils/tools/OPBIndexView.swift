@@ -17,7 +17,7 @@ class OPBIndexView: UIView {
         setupLayout()
         setupStyle()
     }
-
+//----
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupUI()
