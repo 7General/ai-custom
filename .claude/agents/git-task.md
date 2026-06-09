@@ -1,6 +1,6 @@
 ---
 name: git-task
-description: 提交本地修改代码 commit -> push。当需要`提交一下`，自动触发改agent
+description: 提交本地修改代码 commit -> push。当需要`yuki go`，自动触发改agent
 ---
 
 提交关于本项目的所有改动的文件
