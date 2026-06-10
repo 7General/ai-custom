@@ -47,7 +47,26 @@ allowed-tools:
 - `## 加密方式` → `encryptType()` 返回值（`.kong` 或 `.encrypt`）
 - `## 请求格式` → `requestArgument()` 返回值，**严格按 wiki 中的结构生成，不要简化**
 
-### 3. 输出接口定义报告
+### 3. 实现request
+
+ - 实现发送request格式
+  OPBNetworkManager.shared.start(request) {[weak self] request, data, error in
+      guard let `self` = self else { return }
+      guard let entity = [`响应的实体对象`]OPBQRBindEntity.jsonToModel(data as Any, modelType: OPBQRBindEntity.self) as? OPBQRBindEntity  else {
+                
+          return
+      }
+      
+      // 成功
+      if entity.isNormalData() {
+
+      } else {
+        
+      }
+  }
+  
+
+### 4. 输出接口定义报告
 
 #### [接口]整体预览
 
