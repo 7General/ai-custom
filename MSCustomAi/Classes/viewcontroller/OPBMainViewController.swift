@@ -11,6 +11,9 @@ import SwiftTheme
 
 public class OPBMainViewController: OPBUIViewController {
 
+    var scanId: String = ""
+    var orderAmount: String = ""
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -61,15 +64,18 @@ extension OPBMainViewController {
 
     @objc private func didTapCalculateFee() {
         let request = OPBCalculateFeeRequest()
-        // TODO: 填入实际参数
-        request.scanId = ""
-        request.orderAmount = ""
-        OPBNetworkManager.shared.send(request) { (response: OPBCalculateFeeResponse?, error) in
-            if let error = error {
-                debugPrint("calculateFee error: \(error)")
+        request.scanId = scanId
+        request.orderAmount = orderAmount
+        OPBNetworkManager.shared.start(request) { [weak self] request, data, error in
+            guard let `self` = self else { return }
+            guard let entity = OPBCalculateFeeResponse.jsonToModel(data as Any, modelType: OPBCalculateFeeResponse.self) as? OPBCalculateFeeResponse else {
                 return
             }
-            debugPrint("calculateFee response: \(String(describing: response))")
+            if entity.isNormalData() {
+
+            } else {
+
+            }
         }
     }
 
