@@ -16,7 +16,7 @@ allowed-tools:
 ```
 - `type` 使用：`feat`、`fix`、`refactor`、`docs`、`test`、`chore`
 - 提交说明使用中文描述**变更目的**，专业术语保留英文
-- 保持原子化提交：一次 commit 只包含一个逻辑变更
+- 保持原子化提交：一次 commit 只包含一个类型变更
 
 ## 任务
 1. 先查看当前变更，优先读取 staged diff；如果没有 staged 变更，再看工作区变更
