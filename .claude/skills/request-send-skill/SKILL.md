@@ -48,22 +48,31 @@ allowed-tools:
 - `## 请求格式` → `requestArgument()` 返回值，**严格按 wiki 中的结构生成，不要简化**
 
 ### 3. 实现request
-
- - 实现发送request格式
-  OPBNetworkManager.shared.start(request) {[weak self] request, data, error in
+  ### Swift 写法（强制要求）
+```swift
+   view.showHUDIndicatorAtCenter()
+   
+   let request = OPBQRScanTaskRequest()
+   request.qrContent = qrContent
+   request.qrContentSubType = qrType
+   request.qrFrom = qrFrom
+   request.qrScanSdk = scanSdk
+   
+   OPBNetworkManager.shared.start(request) {[weak self] request, data, error in
       guard let `self` = self else { return }
-      guard let entity = [`响应的实体对象`]OPBQRBindEntity.jsonToModel(data as Any, modelType: OPBQRBindEntity.self) as? OPBQRBindEntity  else {
-                
-          return
+      view.hiddenHUDIndicatorAtCenter()
+      
+      guard let entity = [`响应的实体对象`].jsonToModel(data as Any, modelType: OPBQRBindEntity.self) as? OPBQRBindEntity  else {
+         return
       }
       
-      // 成功
       if entity.isNormalData() {
-
+         // TOODO----
       } else {
-        
+         // TOODO----
       }
-  }
+   }
+```
   
 
 ### 4. 输出接口定义报告
