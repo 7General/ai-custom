@@ -98,14 +98,6 @@ imageView.kf.setImage(with: entity.imageUrl.handlerURL(),placeholder: OPBThemePl
 ```
 详细规范请使用 `/request-send-skill` skill。
 
-<!--  TODO......
-1. 需要关于网络请求的wiki
-2. 需要询问用户，指定网络wiki位置
----
-怎么询问用户，要提醒用户传一个网络请求的wiki
----
- -->
-
 
 
 ### 6. MARK 分组规范（中文）
