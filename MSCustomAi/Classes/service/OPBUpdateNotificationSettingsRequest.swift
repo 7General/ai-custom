@@ -8,11 +8,7 @@ class OPBUpdateNotificationSettingsRequest: OPBBaseRequest {
     }
 
     override func requestUrl() -> String {
-        return "/api/v1/notification/settings"
-    }
-
-    override func requestMethod() -> OPBHTTPMethod {
-        return .put
+        return "/api/v1/notification/update"
     }
 
     override func encryptType() -> OPBEncryptType {

@@ -12,7 +12,7 @@
 | # | 方法 | 路径 | 说明 |
 |---|------|------|------|
 | 1 | GET | /api/v1/notification/settings | 获取用户通知开关状态 |
-| 2 | PUT | /api/v1/notification/settings | 更新通知开关状态 |
+| 2 | PUT | /api/v1/notification/update | 更新通知开关状态 |
 
 ---
 
@@ -42,7 +42,7 @@ Authorization: Bearer {token}
 
 ### 接口二：更新通知开关状态
 
-**PUT** `/api/v1/notification/settings`
+**POST** `/api/v1/notification/update`
 
 **请求头**
 ```
