@@ -11,9 +11,6 @@ import SwiftTheme
 
 public class OPBMainViewController: OPBUIViewController {
 
-    var scanId: String = ""
-    var orderAmount: String = ""
-
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -29,79 +26,242 @@ public class OPBMainViewController: OPBUIViewController {
 
 }
 
-// MARK: - Setup
+// MARK: - 设置
 
 extension OPBMainViewController {
 
     func setupUI() {
-
-        view.addSubview(descLabel)
-        view.addSubview(calculateFeeButton)
+        view.addSubview(logoImageView)
+        view.addSubview(phoneContainerView)
+        phoneContainerView.addSubview(areaCodeLabel)
+        phoneContainerView.addSubview(phoneSeparatorView)
+        phoneContainerView.addSubview(phoneTextField)
+        view.addSubview(passwordContainerView)
+        passwordContainerView.addSubview(passwordTextField)
+        passwordContainerView.addSubview(togglePasswordButton)
+        view.addSubview(loginButton)
+        view.addSubview(forgotPasswordButton)
     }
 
     func setupLayout() {
-
-        descLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(24)
-            make.leading.trailing.equalToSuperview().inset(24)
+        logoImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(48)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(80)
         }
 
-        calculateFeeButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-24)
+        phoneContainerView.snp.makeConstraints { make in
+            make.top.equalTo(logoImageView.snp.bottom).offset(40)
             make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(48)
+            make.height.equalTo(52)
+        }
+
+        areaCodeLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(40)
+        }
+
+        phoneSeparatorView.snp.makeConstraints { make in
+            make.leading.equalTo(areaCodeLabel.snp.trailing).offset(8)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(1)
+            make.height.equalTo(20)
+        }
+
+        phoneTextField.snp.makeConstraints { make in
+            make.leading.equalTo(phoneSeparatorView.snp.trailing).offset(8)
+            make.trailing.equalToSuperview().inset(16)
+            make.top.bottom.equalToSuperview()
+        }
+
+        passwordContainerView.snp.makeConstraints { make in
+            make.top.equalTo(phoneContainerView.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(52)
+        }
+
+        passwordTextField.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalTo(togglePasswordButton.snp.leading).offset(-8)
+            make.top.bottom.equalToSuperview()
+        }
+
+        togglePasswordButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(24)
+        }
+
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordContainerView.snp.bottom).offset(32)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(52)
+        }
+
+        forgotPasswordButton.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
         }
     }
 
     func setupAction() {
-        calculateFeeButton.addTarget(self, action: #selector(didTapCalculateFee), for: .touchUpInside)
+        phoneTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
+        forgotPasswordButton.addTarget(self, action: #selector(didTapForgotPassword), for: .touchUpInside)
+        togglePasswordButton.addTarget(self, action: #selector(didTapTogglePassword), for: .touchUpInside)
     }
 
-   /// 添加待定
     func setupStyle() {
-        
-    }
-    // 待定
-
-    @objc private func didTapCalculateFee() {
-        let request = OPBUpdateNotificationSettingsRequest()
-        request.pushEnabled = true
-        OPBNetworkManager.shared.start(request) { [weak self] request, data, error in
-            guard let `self` = self else { return }
-            guard let entity = OPBUpdateNotificationSettingsResponse.jsonToModel(data as Any, modelType: OPBUpdateNotificationSettingsResponse.self) as? OPBUpdateNotificationSettingsResponse else {
-                return
-            }
-            if entity.isNormalData() {
-
-            } else {
-
-            }
-        }
+        view.theme_backgroundColor = MSThemeHelper.mainBackColor
+        phoneContainerView.theme_backgroundColor = MSThemeHelper.mainWhiteTheme
+        passwordContainerView.theme_backgroundColor = MSThemeHelper.mainWhiteTheme
+        updateLoginButtonState()
     }
 
 }
 
-// MARK: - Lazy
+// MARK: - 按钮事件
 
 extension OPBMainViewController {
 
-   
+    @objc private func didTapLogin() {
+        guard let phone = phoneTextField.text, !phone.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else { return }
 
-    
+        view.showHUDIndicatorAtCenter()
 
-    private lazy var descLabel: UILabel = {
-        let it = UILabel()
-        it.font = UIFont.systemFont(ofSize: 14)
-        it.theme_textColor = MSThemeHelper.blackTheme65
+        let request = OPBLoginRequest()
+        request.phone = phone
+        request.password = password
+
+        OPBNetworkManager.shared.start(request) { [weak self] request, data, error in
+            guard let `self` = self else { return }
+            self.view.hiddenHUDIndicatorAtCenter()
+
+            guard let entity = OPBLoginResponse.jsonToModel(data as Any, modelType: OPBLoginResponse.self) as? OPBLoginResponse else {
+                return
+            }
+
+            if entity.isNormalData() {
+                UserDefaults.standard.set(entity.token, forKey: "opb_login_token")
+                UserDefaults.standard.set(entity.userId, forKey: "opb_login_userId")
+                OPNewRouterManager.openURL("opay://home", userInfo: nil)
+            } else {
+                self.view.showHUDText(entity.errorMessage)
+            }
+        }
+    }
+
+    @objc private func didTapForgotPassword() {
+        OPNewRouterManager.openURL("opay://forgot_password", userInfo: nil)
+    }
+
+    @objc private func didTapTogglePassword() {
+        passwordTextField.isSecureTextEntry.toggle()
+        let imageName = passwordTextField.isSecureTextEntry ? "eye.slash" : "eye"
+        togglePasswordButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+
+    @objc private func textFieldDidChange() {
+        updateLoginButtonState()
+    }
+
+}
+
+// MARK: - 私有方法
+
+extension OPBMainViewController {
+
+    private func updateLoginButtonState() {
+        let enabled = !(phoneTextField.text?.isEmpty ?? true) && !(passwordTextField.text?.isEmpty ?? true)
+        loginButton.isEnabled = enabled
+        loginButton.theme_backgroundColor = enabled ? MSThemeHelper.mainColor : MSThemeHelper.mainEnableColor
+    }
+
+}
+
+// MARK: - 懒加载
+
+extension OPBMainViewController {
+
+    private lazy var logoImageView: UIImageView = {
+        let it = UIImageView()
+        it.contentMode = .scaleAspectFit
+        // TODO: 替换为实际 Logo 图片名
         return it
     }()
 
-    private lazy var calculateFeeButton: UIButton = {
-        let it = UIButton(type: .system)
-        it.setTitle("计算税费", for: .normal)
-        it.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        it.setTitleColor(.white, for: .normal)
+    private lazy var phoneContainerView: UIView = {
+        let it = UIView()
         it.layer.cornerRadius = 8
+        it.clipsToBounds = true
+        return it
+    }()
+
+    private lazy var areaCodeLabel: UILabel = {
+        let it = UILabel()
+        it.text = "+86"
+        it.font = UIFont.systemFont(ofSize: 16)
+        it.theme_textColor = MSThemeHelper.blackTheme85
+        it.textAlignment = .center
+        return it
+    }()
+
+    private lazy var phoneSeparatorView: UIView = {
+        let it = UIView()
+        it.theme_backgroundColor = MSThemeHelper.blackTheme15
+        return it
+    }()
+
+    private lazy var phoneTextField: UITextField = {
+        let it = UITextField()
+        it.keyboardType = .phonePad
+        it.font = UIFont.systemFont(ofSize: 16)
+        it.theme_textColor = MSThemeHelper.blackTheme85
+        it.placeholder = "请输入手机号"
+        return it
+    }()
+
+    private lazy var passwordContainerView: UIView = {
+        let it = UIView()
+        it.layer.cornerRadius = 8
+        it.clipsToBounds = true
+        return it
+    }()
+
+    private lazy var passwordTextField: UITextField = {
+        let it = UITextField()
+        it.isSecureTextEntry = true
+        it.font = UIFont.systemFont(ofSize: 16)
+        it.theme_textColor = MSThemeHelper.blackTheme85
+        it.placeholder = "请输入密码"
+        return it
+    }()
+
+    private lazy var togglePasswordButton: UIButton = {
+        let it = UIButton(type: .system)
+        it.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        it.theme_tintColor = MSThemeHelper.blackTheme45
+        return it
+    }()
+
+    private lazy var loginButton: UIButton = {
+        let it = UIButton(type: .system)
+        it.setTitle("登录", for: .normal)
+        it.setTitleColor(.white, for: .normal)
+        it.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        it.layer.cornerRadius = 8
+        it.isEnabled = false
+        return it
+    }()
+
+    private lazy var forgotPasswordButton: UIButton = {
+        let it = UIButton(type: .system)
+        it.setTitle("忘记密码", for: .normal)
+        it.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        it.theme_setTitleColor(MSThemeHelper.blackTheme65, forState: .normal)
         return it
     }()
 
