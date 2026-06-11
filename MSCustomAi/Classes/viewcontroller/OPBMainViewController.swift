@@ -64,12 +64,11 @@ extension OPBMainViewController {
     // 待定
 
     @objc private func didTapCalculateFee() {
-        let request = OPBCalculateFeeRequest()
-        request.scanId = scanId
-        request.orderAmount = orderAmount
+        let request = OPBUpdateNotificationSettingsRequest()
+        request.pushEnabled = true
         OPBNetworkManager.shared.start(request) { [weak self] request, data, error in
             guard let `self` = self else { return }
-            guard let entity = OPBCalculateFeeResponse.jsonToModel(data as Any, modelType: OPBCalculateFeeResponse.self) as? OPBCalculateFeeResponse else {
+            guard let entity = OPBUpdateNotificationSettingsResponse.jsonToModel(data as Any, modelType: OPBUpdateNotificationSettingsResponse.self) as? OPBUpdateNotificationSettingsResponse else {
                 return
             }
             if entity.isNormalData() {
