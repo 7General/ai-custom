@@ -33,7 +33,7 @@ allowed-tools:
 - 如果无法判断 `scope`，可省略 scope
 
 ## 输出push报告
-#### push简报 - [发生事件]yyyy-MM-dd
+#### 当前项目 - push简报 - [yyyy-MM-dd]
 ##### ==== 修改文件编号01------
 
 - [修改文件名]：xxx/xxxx/xxx.xx
