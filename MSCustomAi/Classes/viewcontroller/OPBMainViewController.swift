@@ -11,6 +11,8 @@ import SwiftTheme
 
 public class OPBMainViewController: OPBUIViewController {
 
+    // MARK: - 生命周期
+
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -70,9 +72,9 @@ extension OPBMainViewController {
         }
 
         phoneTextField.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
             make.leading.equalTo(phoneSeparatorView.snp.trailing).offset(8)
             make.trailing.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview()
         }
 
         passwordContainerView.snp.makeConstraints { make in
@@ -82,9 +84,9 @@ extension OPBMainViewController {
         }
 
         passwordTextField.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalTo(togglePasswordButton.snp.leading).offset(-8)
-            make.top.bottom.equalToSuperview()
         }
 
         togglePasswordButton.snp.makeConstraints { make in
@@ -250,7 +252,7 @@ extension OPBMainViewController {
     private lazy var loginButton: UIButton = {
         let it = UIButton(type: .system)
         it.setTitle("登录", for: .normal)
-        it.setTitleColor(.white, for: .normal)
+        it.theme_setTitleColor(MSThemeHelper.mainWhite01, forState: .normal)
         it.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         it.layer.cornerRadius = 8
         it.isEnabled = false
