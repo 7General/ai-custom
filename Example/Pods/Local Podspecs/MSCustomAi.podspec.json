@@ -1,9 +1,9 @@
 {
   "name": "MSCustomAi",
   "version": "1.0.0",
-  "summary": "A short description of MSCustomAi.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/huizhou.wang/MSCustomAi",
+  "summary": "A collection of Swift utilities including theme management, UI extensions and helpers.",
+  "description": "MSCustomAi provides reusable Swift utilities for iOS apps, including\ntheme/dark-mode management via SwiftTheme, tappable image views,\nand Dictionary convenience extensions.",
+  "homepage": "https://github.com/7General",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,16 +12,20 @@
     "huizhou.wang": "wanghuizhou21@163.com"
   },
   "source": {
-    "git": "https://github.com/huizhou.wang/MSCustomAi.git",
+    "git": "https://github.com/7General/ai-custom.git",
     "tag": "1.0.0"
   },
   "platforms": {
-    "ios": "10.0"
+    "ios": "12.0"
   },
+  "swift_versions": [
+    "5.0"
+  ],
   "source_files": "MSCustomAi/Classes/**/*",
   "dependencies": {
     "SwiftTheme": [
 
     ]
-  }
+  },
+  "swift_version": "5.0"
 }
