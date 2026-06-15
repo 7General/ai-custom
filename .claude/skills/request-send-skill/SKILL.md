@@ -1,6 +1,6 @@
 ---
 name: request-send-skill
-description: 按照标准流程实现功能编码，确保代码质量与组件结构合规。当需要创建网络请求或修改网络请求代码时，自动触发该技能
+description: 按照标准流程实现网络请求功能，确保代码质量与组件结构合规。触发关键词： 创建网络请求、修改网络请求代码
 allowed-tools:
   - Read
   - Write

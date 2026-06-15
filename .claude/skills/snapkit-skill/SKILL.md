@@ -1,6 +1,6 @@
 ---
 name: snapkit-skill
-description: 给对象添加约束，自动布局，makeConstraints, updateConstraints, remakeConstraints,或给一个view添加布局时或相对布局代码。当有SnapKit约束、布局约束、AutoLayout、makeConstraints、updateConstraints、remakeConstraints、约束报错、约束崩溃、布局错误、leading/trailing、left/right、UI布局、视图定位、分屏约束、约束冲突 自动出发该技能
+description: 给对象添加、修改、fix约束，自动布局，makeConstraints, updateConstraints, remakeConstraints,或给一个view添加布局时或相对布局代码。触发关键词： 约束，UI布局、约束冲突、布局、布局错误、更新布局、更新约束、约束报错、约束崩溃、布局错误
 ---
 
 # SnapKit 约束规范

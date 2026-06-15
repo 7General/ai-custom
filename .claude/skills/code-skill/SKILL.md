@@ -1,6 +1,6 @@
 ---
 name: code-skill
-description: 按照标准流程实现功能编码，确保代码质量与架构合规。包含颜色、字体、lazy、UIButton、UILabel、UIImageView、UICollectionView、网络请求、相对宽度、渐变色、富文本、MARK注释、命名规范、初始化顺序。当需要编码或修改项目代码时、代码检查，自动触发该技能
+description: 按照标准流程实现功能编码，确保代码质量与架构合规。触发关键词：编码、开始编码、代码技能、开始写代码
 allowed-tools:
   - Read
   - Write
