@@ -1,8 +1,8 @@
 # OPBMainViewController 代码检查报告
 
 ## 文档信息
-- 版本：v1.0
-- 日期：2026-06-14
+- 版本：v1.1
+- 日期：2026-06-15
 
 ## 1. 概述
 
@@ -27,6 +27,12 @@
 | 问题 | 位置 | 说明 |
 |------|------|------|
 | `setTitleColor(.white, for: .normal)` | 第258行 loginButton 懒加载 | 直接使用 `UIColor.white`，未使用 `theme_` 前缀，不支持暗黑适配。应改用 `it.theme_setTitleColor(MSThemeHelper.mainWhite, forState: .normal)` |
+
+### 2.2.1 未找到的主题颜色
+
+| 文件位置 | 问题 | 说明 |
+|----------|------|------|
+| `Classes/viewcontroller/OPBMainViewController.swift` | 在引用表中未找到颜色：`#098793` | infoLabel 背景色，已使用 `ThemeColorPicker` 内联，建议补充到 MSThemeHelper |
 
 ### 2.3 SnapKit 约束顺序
 

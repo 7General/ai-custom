@@ -5,6 +5,10 @@
 //  Created by huizhou.wang on 2026/06/09.
 //
 
+// [TODO-Color] 缺少语义化颜色：浅色 #098793 / 暗黑 待定
+// 建议在 MSThemeHelper 中补充：
+// public static let xxx : MSThemeColor = MSThemeColor("#098793", "#098793")
+
 import UIKit
 import SnapKit
 import SwiftTheme
@@ -20,6 +24,7 @@ public class OPBMainViewController: OPBUIViewController {
         setupAction()
         setupStyle()
     }
+    var infoLabel = UILabel()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -43,6 +48,7 @@ extension OPBMainViewController {
         passwordContainerView.addSubview(togglePasswordButton)
         view.addSubview(loginButton)
         view.addSubview(forgotPasswordButton)
+        view.addSubview(infoLabel)
     }
 
     func setupLayout() {
@@ -105,6 +111,12 @@ extension OPBMainViewController {
             make.top.equalTo(loginButton.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
         }
+
+        infoLabel.snp.makeConstraints { make in
+            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(40)
+        }
     }
 
     func setupAction() {
@@ -119,6 +131,7 @@ extension OPBMainViewController {
         view.theme_backgroundColor = MSThemeHelper.mainBackColor
         phoneContainerView.theme_backgroundColor = MSThemeHelper.mainWhiteTheme
         passwordContainerView.theme_backgroundColor = MSThemeHelper.mainWhiteTheme
+        infoLabel.theme_backgroundColor = ThemeColorPicker(colors: "#098793", "#098793")
         updateLoginButtonState()
     }
 
@@ -206,7 +219,7 @@ extension OPBMainViewController {
         let it = UILabel()
         it.text = "+86"
         it.font = UIFont.systemFont(ofSize: 16)
-        it.theme_textColor = MSThemeHelper.blackTheme85
+        it.theme_textColor = MSThemeHelper.blackTheme101
         it.textAlignment = .center
         return it
     }()
