@@ -63,11 +63,6 @@ allowed-tools:
    label.theme_textColor = MSThemeHelper.blackTheme85
    ```
 3. **找不到** → 在 `setupStyle()` 中用 `ThemeColorPicker` 内联，并在文件顶部输出一条文档注释记录缺失颜色，格式如下：
-   ```swift
-   // [TODO-Color] 缺少语义化颜色：浅色 #007AFF / 暗黑 #000000D9
-   // 建议在 MSThemeHelper 中补充：
-   // public static let xxx : MSThemeColor = MSThemeColor("#007AFF", "#000000D9")
-   ```
    ### 输出文档简报
    | 文件位置        |       问题          	 | 说明      |
    |---------------| -----------------------| ------- |
