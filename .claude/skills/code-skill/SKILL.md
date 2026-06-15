@@ -12,12 +12,13 @@ allowed-tools:
 | data | 	When to Use	Reference | Reference |
 |---------------| -----------------------| ------- |
 |主题颜色适配| 字体颜色、背景色、填充色 |	`reference/theme-color-map.md`|
+|组件结构| 组件具体配置和文件结构 |	`rules/组件结构.md`|
+|编码规范| 代码编写规范和示例 |	`rules/编码规范.md`|
 
 
 ## 前置条件
+- **必须读取** `rules/编码规范.md`（每次编码任务都需要）
 - 读取相关的规则文件（按需加载）
-- 读取`组件结构.md`相关的规则文件（按需加载）
-- 读取相关的wiki（按需加载）
 - 确认当前任务涉及的模块类型
 
 ## 代码检查流程
@@ -67,6 +68,12 @@ allowed-tools:
    // 建议在 MSThemeHelper 中补充：
    // public static let xxx : MSThemeColor = MSThemeColor("#007AFF", "#000000D9")
    ```
+   ### 输出文档简报
+   | 文件位置        |       问题          	 | 说明      |
+   |---------------| -----------------------| ------- |
+   |classsess/OPBMianViewColtroller.swift| 在引用表中未找到颜色：#xxxxee |	xxxx|
+
+
 
 ### 3. 重要提醒：写 UI 代码时必须遵循 SnapKit 规范
 
@@ -140,12 +147,12 @@ class MyViewController: UIViewController {
 
 
 
-## 代码检查简报
+## 代码简报
 
-### 代码检查简报模版
+### 代码简报模版
 
 ```markdown
-# 功能名称 - 代码检查简报
+# 功能名称 - 代码简报
 
 ## 文档信息
 - 版本：v1.0
@@ -168,7 +175,17 @@ class MyViewController: UIViewController {
 ### 2.1 功能需求
 列出所有功能需求
 
+### 2.2 未找到的主题颜色
+列出所有未找到的主题颜色
+
 ```
+
+## 附录
+
+### 变更历史
+| 版本 | 日期 | 说明 |
+|------|------|------|
+| v1.0 | 2026-06-11 | 初版 |
 
 
 
