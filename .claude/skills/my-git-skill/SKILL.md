@@ -1,6 +1,6 @@
 ---
 name: my-git-skill
-description: 提交当前仓库代码,并生成可用的git commit message。当需要提交代码、推送远端、push时，自动触发该技能
+description: 提交当前仓库代码,并生成可用的git commit message。当需要提交代码、推送远端、push,acp时，自动触发该技能
 allowed-tools:
   - Read
   - Glob
