@@ -49,10 +49,21 @@ AI：[触发multica-design]
 2. 技术设计：认证架构设计
 3. 接口设计：认证API定义
 
+```swift
+文档产物
+ docs/design/{feature}-design.md
+ docs/design/{feature}-api.md
+```
+
 ✏️ 阶段2：编码实现
 1. TDD开发：先写测试再写代码
 2. 功能实现：用户注册、登录、密码重置
 4. 按规范编写
+
+```swift
+文档产物
+ docs/code/{feature}-code-review.md
+```
 
 [自动调用z-code-skill]
 
@@ -61,6 +72,11 @@ AI：[触发multica-design]
 2. 代码与设计对应
 3. 代码真实存在性验证
 4. 代码规范检查
+
+```swift
+文档产物
+ docs/code/{feature}-consistency-check.md
+```
 
 [自动调用consistency-check]
 
