@@ -5,151 +5,122 @@
 | 项目 | 内容 |
 |------|------|
 | 检查时间 | 2026-06-16 |
-| 设计文档 | `docs/design/login-design.md` |
+| 版本 | v2.0（基于 v1.0 增量更新） |
+| 设计文档 | `docs/code/OPBMainViewController-design.md` (v1.3) |
 | API文档 | `docs/api/login-api.md` |
-| 代码评审文档 | `docs/code/OPBMainViewController-design.md` |
 | 扫描文件 | `viewcontroller/OPBMainViewController.swift`、`service/OPBLoginRequest.swift`、`entity/OPBLoginResponse.swift` |
 
 ---
 
 ## 1. 总体一致性评分
 
-| 检查维度 | 一致率 | 评级 |
-|---------|-------|------|
-| 功能一致性（F1-F7） | 6/7（86%） | ⚠ 基本一致 |
-| 模块对应性 | 3/3（100%） | ✅ 一致 |
-| 接口对应性 | 1/1（100%） | ✅ 一致 |
-| 数据模型对应性 | 3/3 字段存在，类型偏差 | ⚠ 基本一致 |
-| 代码真实存在性 | 存在阻断性问题（`blackTheme101`） | ❌ |
-| **综合评级** | | **⚠ 有条件通过** |
+| 检查维度 | 一致率 | 评级 | v1.0 → v2.0 |
+|---------|-------|------|------------|
+| 功能一致性（F1-F7） | 6/7（86%） | ⚠ 基本一致 | 无变化 |
+| 模块对应性 | 3/3（100%） | ✅ 一致 | 无变化 |
+| 接口对应性 | 1/1（100%） | ✅ 一致 | 无变化 |
+| 数据模型对应性 | 3/3 字段，类型偏差 | ⚠ 基本一致 | 无变化 |
+| 代码规范一致性 | 9/10（90%） | ⚠ 基本一致 | ↑ 提升（C-02 已修复） |
+| 代码真实存在性 | 阻断性问题存在（`blackTheme101`） | ❌ | B-01 仍未修复 |
+| **综合评级** | | **❌ 不通过** | 无变化 |
 
 ---
 
-## 2. 功能一致性详情
+## 2. 本次变更验证
+
+| 变更 | 位置 | 规范要求 | 状态 |
+|-----|------|---------|------|
+| `// MARK: - 生命周期-----` → `// MARK: - 生命周期` | `:18` | MARK 格式不含多余字符 | ✅ 已修复（C-02） |
+
+---
+
+## 3. 功能一致性详情
 
 | 编号 | 设计功能 | 代码实现位置 | 状态 | 说明 |
 |-----|---------|-------------|------|------|
 | F1 | 页面顶部展示 App Logo | `OPBMainViewController.swift:204-209` | ⚠ | `logoImageView` 存在但未设置图片名（TODO 占位） |
-| F2 | 手机号输入框，左侧固定 +86 | `OPBMainViewController.swift:218-225` | ✅ | `areaCodeLabel` text="+86"，正确 |
-| F3 | 密码输入框，默认隐藏，支持切换 | `OPBMainViewController.swift:249-263` | ✅ | `isSecureTextEntry=true`，`togglePasswordButton` 正常切换 |
+| F2 | 手机号输入框，左侧固定 +86 | `OPBMainViewController.swift:218-225` | ✅ | `areaCodeLabel.text="+86"` 正确 |
+| F3 | 密码输入框，默认隐藏，支持切换 | `OPBMainViewController.swift:249-263` | ✅ | `isSecureTextEntry=true`，切换正常 |
 | F4 | 登录按钮，两项不为空才可点击 | `OPBMainViewController.swift:192-196` | ✅ | `updateLoginButtonState()` 逻辑正确 |
 | F5 | 忘记密码路由跳转 | `OPBMainViewController.swift:172-174` | ✅ | `openURL("opay://forgot_password")` 正确 |
-| F6 | 登录成功存 token，跳转首页 | `OPBMainViewController.swift:163-165` | ✅ | 存储 `opb_login_token`/`opb_login_userId`，路由 `opay://home` 正确 |
-| F7 | 登录失败展示 Toast | `OPBMainViewController.swift:167-168` | ✅ | `showHUDText(entity.errorMessage)` 正确 |
+| F6 | 登录成功存 token，跳转首页 | `OPBMainViewController.swift:163-165` | ✅ | `opb_login_token`/`opb_login_userId`，`opay://home` |
+| F7 | 登录失败展示 Toast | `OPBMainViewController.swift:167-168` | ✅ | `showHUDText(entity.errorMessage)` |
 
 **一致率：6/7（86%）**
 
 ---
 
-## 3. 接口对应详情
+## 4. 接口对应详情
 
-| 设计接口 | 代码位置 | 请求参数 | 接口路径 | 状态 |
-|---------|---------|---------|---------|------|
-| POST `/api/v1/user/login` | `OPBLoginRequest.swift:7-8` | ✅ phone, password | ✅ `/api/v1/user/login` | ✅ 完全对应 |
-
-**请求参数对照：**
-
-| 设计参数 | 代码属性 | 状态 |
-|---------|---------|------|
-| `phone` (String, 必填) | `var phone: String = ""` | ✅ |
-| `password` (String, 必填) | `var password: String = ""` | ✅ |
+| 设计接口 | 代码位置 | 请求参数 | 状态 |
+|---------|---------|---------|------|
+| POST `/api/v1/user/login` | `OPBLoginRequest.swift:7-8` | phone, password ✅ | ✅ 完全对应 |
 
 **一致率：1/1（100%）**
 
 ---
 
-## 4. 数据模型对应详情
-
-### OPBLoginResponse（entity/OPBLoginResponse.swift）
+## 5. 数据模型对应详情
 
 | 设计字段 | 设计类型 | 代码字段 | 代码类型 | 状态 |
 |---------|---------|---------|---------|------|
-| `token` | `String?` | `token` | `String = ""` | ⚠ 类型不匹配（可选 vs 非可选） |
-| `userId` | `String?` | `userId` | `String = ""` | ⚠ 类型不匹配（可选 vs 非可选） |
-| `expireTime` | `Int?` | `expireTime` | `Int = 0` | ⚠ 类型不匹配（可选 vs 非可选） |
+| `token` | `String?` | `token` | `String = ""` | ⚠ 类型不匹配 |
+| `userId` | `String?` | `userId` | `String = ""` | ⚠ 类型不匹配 |
+| `expireTime` | `Int?` | `expireTime` | `Int = 0` | ⚠ 类型不匹配 |
 
-> 字段名称全部正确，但设计文档定义为可选型（`String?`/`Int?`），代码实现为非可选型带默认值。功能上不影响运行，但与设计定义存在差异。
-
-**一致率：3/3 字段，类型存在偏差**
-
-### UserDefaults Key 对照
-
-| 设计 Key | 来源字段 | 代码位置 | 状态 |
-|---------|---------|---------|------|
-| `opb_login_token` | `entity.token` | `OPBMainViewController.swift:163` | ✅ |
-| `opb_login_userId` | `entity.userId` | `OPBMainViewController.swift:164` | ✅ |
+> 字段名全部正确，类型可选性存在偏差，不影响功能运行。
 
 ---
 
-## 5. 代码真实存在性检查
+## 6. 代码规范一致性检查
 
-### 5.1 文件存在性
+| 编号 | 规范要求 | 代码现状 | 位置 | 状态 |
+|-----|---------|---------|------|------|
+| R-01 | 普通变量在 `viewDidLoad()` 前声明 | `var infoLabel` 在 `viewDidLoad()` 之后 | `:27` | ❌ |
+| R-02 | MARK 格式 `// MARK: - 名称` | `// MARK: - 生命周期` | `:18` | ✅ 已修复 |
+| R-03 | 继承 `OPBUIViewController` | ✅ | `:16` | ✅ |
+| R-04 | `setupUI/Layout/Action/Style` 完整 | ✅ 四个方法均存在 | `:40-136` | ✅ |
+| R-05 | `deinit` + `removeObserver` | ✅ | `:29-32` | ✅ |
+| R-06 | 懒加载闭包用 `it` | ✅ 全部使用 | `:204-281` | ✅ |
+| R-07 | 无 `_` 开头变量/方法 | ✅ | — | ✅ |
+| R-08 | 路由 `OPNewRouterManager.openURL` | ✅ | `:165,173` | ✅ |
+| R-09 | 主题颜色 `theme_` 前缀 | ✅ | — | ✅ |
+| R-10 | SnapKit 使用 `leading/trailing` | ✅ | `:54-119` | ✅ |
 
-| 设计提及的文件 | 实际路径 | 是否存在 |
-|--------------|---------|---------|
-| `viewcontroller/OPBMainViewController` | `Classes/viewcontroller/OPBMainViewController.swift` | ✅ |
-| `service/OPBLoginRequest` | `Classes/service/OPBLoginRequest.swift` | ✅ |
-| `entity/OPBLoginResponse` | `Classes/entity/OPBLoginResponse.swift` | ✅ |
-
-### 5.2 函数/方法存在性
-
-| 设计提及的方法 | 代码位置 | 状态 |
-|--------------|---------|------|
-| `setupUI()` | `OPBMainViewController.swift:40` | ✅ |
-| `setupLayout()` | `OPBMainViewController.swift:54` | ✅ |
-| `setupAction()` | `OPBMainViewController.swift:122` | ✅ |
-| `setupStyle()` | `OPBMainViewController.swift:130` | ✅ |
-| `didTapLogin()` | `OPBMainViewController.swift:144` | ✅ |
-| `didTapForgotPassword()` | `OPBMainViewController.swift:172` | ✅ |
-
-### 5.3 颜色常量存在性 ❌
-
-| 引用常量 | 代码位置 | MSThemeHelper 中是否存在 |
-|---------|---------|----------------------|
-| `MSThemeHelper.blackTheme101` | `OPBMainViewController.swift:222` | ❌ **不存在，编译报错** |
-| `MSThemeHelper.blackTheme85` | line 237, 253 | ✅ |
-| `MSThemeHelper.blackTheme65` | line 279 | ✅ |
-| `MSThemeHelper.blackTheme45` | line 261 | ✅ |
-| `MSThemeHelper.blackTheme15` | line 229 | ✅ |
-| `MSThemeHelper.mainColor` | line 195 | ✅ |
-| `MSThemeHelper.mainEnableColor` | line 195 | ✅ |
-| `MSThemeHelper.mainWhiteTheme` | line 132, 133 | ✅ |
-| `MSThemeHelper.mainBackColor` | line 131 | ✅ |
-| `MSThemeHelper.mainWhite01` | line 268 | ✅ |
+**规范一致率：9/10（90%）**
 
 ---
 
-## 6. 验收条件一致性检查
+## 7. 未找到的主题颜色
 
-| 验收条件 | 设计描述 | 代码实现 | 状态 |
-|---------|---------|---------|------|
-| 空字段时登录按钮置灰 | `loginButton.isEnabled = false` | `updateLoginButtonState()` ✅ | ✅ |
-| 点击登录显示 Loading | 按钮显示 Loading 状态 | 仅调用 `showHUDIndicatorAtCenter()`，**按钮本身无 Loading 状态** | ⚠ 部分实现 |
-| 成功存 token 跳转首页 | UserDefaults 存储 + 路由 | line 163-165 ✅ | ✅ |
-| 失败 Toast 提示 | Toast 展示服务端错误 | `showHUDText(entity.errorMessage)` ✅ | ✅ |
-| 登出清除 token | 不在白名单 | 未在本文件实现（由 LoginKit+cache 负责，符合架构设计） | ✅ |
+| 文件位置 | 颜色/常量 | 说明 | 状态 |
+|---------|---------|------|------|
+| `:134` | `#098793` | infoLabel 背景色，inline 临时处理，暗黑值未定 | ⚠ 待补充常量 |
+| `:222` | `MSThemeHelper.blackTheme101` | MSThemeHelper 中不存在 | ❌ 编译报错 |
 
 ---
 
-## 7. 问题汇总
+## 8. 问题汇总
 
 ### 🔴 阻断性问题（必须修复）
 
 | 编号 | 问题 | 位置 | 修复建议 |
 |-----|------|------|---------|
-| B-01 | `MSThemeHelper.blackTheme101` 不存在，编译报错 | `OPBMainViewController.swift:222` | 改为 `MSThemeHelper.blackTheme85` 或 `blackTheme85_01`（需确认设计意图） |
+| B-01 | `MSThemeHelper.blackTheme101` 不存在，编译失败 | `:222` | 改为 `blackTheme85_01` 或补充新常量 |
 
 ### 🟡 一般问题（建议修复）
 
-| 编号 | 问题 | 位置 | 修复建议 |
-|-----|------|------|---------|
-| C-01 | F1 Logo 图片名未配置，仅有 TODO 注释 | `OPBMainViewController.swift:207` | 替换为实际图片资源名 |
-| C-02 | 登录按钮点击后无 Loading 状态（仅全屏 HUD） | `OPBMainViewController.swift:148` | 可在请求发起时设置 `loginButton.isEnabled = false`，回调完成后恢复 |
-| C-03 | `OPBLoginResponse` 字段类型：设计为可选型，代码为非可选带默认值 | `OPBLoginResponse.swift:4-6` | 与设计确认是否需要改为 `String?`/`Int?` |
+| 编号 | 问题 | 位置 | 状态 |
+|-----|------|------|------|
+| C-01 | `var infoLabel` 声明在 `viewDidLoad()` 之后 | `:27` | ❌ 未修复 |
+| C-02 | MARK 格式多余 `-----` | `:18` | ✅ 已修复 |
+| C-03 | Logo 图片名 TODO 占位 | `:207` | ❌ 未修复 |
+| C-04 | `#098793` 未定义为语义化颜色常量 | `:134` | ❌ 未修复 |
+| C-05 | `OPBLoginResponse` 字段类型可选性差异 | `OPBLoginResponse.swift` | ❌ 未修复 |
 
 ---
 
-## 8. 功能-代码映射清单
+## 9. 功能-代码映射清单
 
 ### F1：页面顶部 Logo
 - **文件**：`OPBMainViewController.swift`
@@ -158,37 +129,26 @@
 - **⚠ 图片名未设置（TODO 占位）**
 
 ### F2：手机号输入框
-- **文件**：`OPBMainViewController.swift`
 - **组件**：`phoneContainerView`、`areaCodeLabel`（+86）、`phoneSeparatorView`、`phoneTextField`
-- **懒加载**：第 211-240 行
-- **布局**：第 61-84 行
+- **懒加载**：第 211-240 行 / **布局**：第 61-84 行
 
 ### F3：密码输入框
-- **文件**：`OPBMainViewController.swift`
 - **组件**：`passwordContainerView`、`passwordTextField`、`togglePasswordButton`
-- **懒加载**：第 242-263 行
-- **切换逻辑**：`didTapTogglePassword()` 第 176-180 行
+- **懒加载**：第 242-263 行 / **切换逻辑**：`didTapTogglePassword()` 第 176-180 行
 
 ### F4：登录按钮状态控制
-- **文件**：`OPBMainViewController.swift`
 - **核心方法**：`updateLoginButtonState()` 第 192-196 行
-- **触发时机**：`textFieldDidChange()` 第 182-184 行 + `setupStyle()` 初始化
+- **触发**：`textFieldDidChange()` 第 182-184 行 + `setupStyle()` 初始化
 
 ### F5：忘记密码跳转
-- **文件**：`OPBMainViewController.swift`
-- **方法**：`didTapForgotPassword()` 第 172-174 行
-- **路由**：`opay://forgot_password`
+- **方法**：`didTapForgotPassword()` 第 172-174 行 / **路由**：`opay://forgot_password`
 
 ### F6：登录成功处理
-- **文件**：`OPBMainViewController.swift`
 - **方法**：`didTapLogin()` 第 144-170 行
-- **存储**：第 163-164 行（UserDefaults）
-- **跳转**：第 165 行（`opay://home`）
+- **存储**：第 163-164 行（UserDefaults）/ **跳转**：第 165 行（`opay://home`）
 
 ### F7：登录失败 Toast
-- **文件**：`OPBMainViewController.swift`
-- **实现**：`didTapLogin()` 第 167-168 行
-- **方法**：`view.showHUDText(entity.errorMessage)`
+- **实现**：`didTapLogin()` 第 167-168 行 / `view.showHUDText(entity.errorMessage)`
 
 ---
 
@@ -197,3 +157,4 @@
 | 版本 | 日期 | 说明 |
 |------|------|------|
 | v1.0 | 2026-06-16 | 初版一致性检查 |
+| v2.0 | 2026-06-16 | 增量更新：C-02 已修复，B-01 仍阻断 |
