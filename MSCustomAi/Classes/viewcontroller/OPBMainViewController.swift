@@ -15,7 +15,7 @@ import SwiftTheme
 
 public class OPBMainViewController: OPBUIViewController {
 
-    // MARK: - 生命周期-----
+    // MARK: - 生命周期
 
     override public func viewDidLoad() {
         super.viewDidLoad()
