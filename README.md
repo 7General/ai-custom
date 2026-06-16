@@ -1,3 +1,4 @@
+
 # 工程开发模式
 
 ## 概述
@@ -8,9 +9,9 @@
 
 ### 1. 全生命周期管理
 
-```
 需求分析 → 技术设计 → 代码实现 → 一致性验证 → 单元测试(按需) → 质量检查
-```
+
+
 
 ### 2. 开发前期
 
@@ -25,62 +26,56 @@
 
 ## 技能包结构
 
-```
 skills/
 ├── multica-design/                # 设计阶段
 ├── z-code-skill/                  # 编码阶段
 ├── consistency-check/             # 代码-设计一致性验证
 ├── harness-testing/               # 测试阶段（按需）
 └── harness-quality/               # 质量阶段
-```
+
+
 
 ## 快速开始
 
 ### 场景1：新功能开发
 
-```
 用户：我要开发一个用户认证功能
 
 AI：[触发multica-design]
 已启动工程开发模式，开始用户认证功能开发流程：
 
 📋 阶段1：需求与设计
+
 1. 需求分析：用户认证功能需求
 2. 技术设计：认证架构设计
 3. 接口设计：认证API定义
+4. 功能设计文档`docs/design/{feature}-design.md`
+5. 接口设计文档`docs/design/{feature}-api.md`
 
-```swift
-文档产物
- docs/design/{feature}-design.md
- docs/design/{feature}-api.md
-```
 
 ✏️ 阶段2：编码实现
+
 1. TDD开发：先写测试再写代码
 2. 功能实现：用户注册、登录、密码重置
-4. 按规范编写
+3. 按规范编写
+4. 代码检查文档 `docs/code/{feature}-code-review.md`
 
-```swift
-文档产物
- docs/code/{feature}-code-review.md
-```
 
 [自动调用z-code-skill]
 
 ✓ 阶段3：设计一致性验证
+
 1. 功能一致性检查
 2. 代码与设计对应
 3. 代码真实存在性验证
 4. 代码规范检查
+5. 一致性文档`docs/code/{feature}-consistency-check.md`
 
-```swift
-文档产物
- docs/code/{feature}-consistency-check.md
-```
 
 [自动调用consistency-check]
 
 🔬 阶段4：测试验证
+
 1. 单元测试执行
 2. 集成测试执行
 3. 覆盖率分析
@@ -88,6 +83,7 @@ AI：[触发multica-design]
 [自动调用harness-test skill]（待定）
 
 🚀 阶段5：构建部署
+
 1. 构建流水线
 2. 环境部署
 3. 发布验证
@@ -95,11 +91,11 @@ AI：[触发multica-design]
 [自动调用harness-deploy skill]（待定）
 
 ✅ 开发完成！
-```
+
+
 
 ### 场景2：代码质量检查
 
-```
 用户：检查当前代码质量
 
 AI：[触发z-code-skill]
@@ -111,12 +107,15 @@ AI：[触发z-code-skill]
 ✓ 测试覆盖率分析
 
 质量报告已生成：
+
 - 代码评分: 85/100
 - 发现问题: 12个
 - 改进建议: 8条
-```
+
+
 
 ## 子技能详解
+
 ### 1. multica-design（设计阶段）
 
 **职责**：管理软件工程的需求分析与技术设计阶段
@@ -199,7 +198,6 @@ AI：[触发z-code-skill]
 - 覆盖率报告
 - 测试失败分析
 
-
 ## 质量标准
 
 ### 代码质量指标
@@ -254,7 +252,5 @@ AI：[触发z-code-skill]
 - **版本**: 1.1.0
 - **发布日期**: 2026-06-01
 - **更新内容**: 增加代码-设计一致性验证功能
-
----
 
 
