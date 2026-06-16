@@ -1,177 +1,125 @@
 # OPBMainViewController - 代码评审简报
 
 ## 文档信息
-- 版本：v1.0
+- 版本：v2.0
 - 日期：2026-06-16
+
+## 1. 概述
+
+### 1.1 背景
+OPBMainViewController 是登录页面控制器，包含手机号输入、密码输入、登录按钮、忘记密码等功能。
+
+### 1.2 评审范围
 - 文件：`MSCustomAi/Classes/viewcontroller/OPBMainViewController.swift`
+- 评审内容：命名规范、主题颜色、SnapKit 约束、MARK 分组、网络请求、逻辑正确性
 
 ---
 
-## 1. 评审概述
+## 2. 规范检查结果
 
-针对 `OPBMainViewController` 登录页面代码，按照编码规范、SnapKit约束规范、网络请求规范进行全面质量检查。
+### 2.1 通过项
 
----
-
-## 2. 问题清单
-
-| 编号 | 严重度 | 类型 | 文件位置 | 问题描述 |
-|------|--------|------|----------|----------|
-| Q-01 | 🔴 高 | 编码规范 | 第 27 行 | `infoLabel` 在 `viewDidLoad()` 之后声明，违反变量声明位置规范 |
-| Q-02 | 🟡 中 | SnapKit规范 | 第 54-119 行 | 所有带具体数字的约束未添加 `~` 优先级标记 |
-| Q-03 | 🟡 中 | 主题颜色 | 第 134 行 | `#098793` 未在 MSThemeHelper 中定义，暗黑值未确定 |
-| Q-04 | 🟢 低 | MARK格式 | 第 18 行 | `// MARK: - 生命周期-----` 含多余 `-----` |
-| Q-05 | 🟢 低 | 网络请求规范 | 第 156 行 | `self.view.hiddenHUDIndicatorAtCenter()` 应简化为 `view.hiddenHUDIndicatorAtCenter()` |
-| Q-06 | 🟢 低 | 命名规范 | 第 16 行 | 类名后缀使用 `ViewController`，规范要求 `VC` 后缀（如 `OPBMainVC`） |
-
----
-
-## 3. 详细说明
-
-### Q-01 变量声明位置违规 🔴
-
-**规范**：声明的普通变量要在 `viewDidLoad()` 之前声明
-
-**问题代码**（第 27 行）：
-```swift
-override public func viewDidLoad() { // line 20
-    super.viewDidLoad()
-    // ...
-}
-var infoLabel = UILabel()  // ❌ 在 viewDidLoad() 之后！
-```
-
-**修正**：
-```swift
-var infoLabel = UILabel()  // ✅ 移到 viewDidLoad() 之前
-
-override public func viewDidLoad() {
-    super.viewDidLoad()
-    // ...
-}
-```
+| 检查项 | 状态 | 说明 |
+|--------|------|------|
+| 文件前缀 `OPB` | ✓ | `OPBMainViewController` |
+| 继承 `OPBUIViewController` | ✓ | |
+| 实现四个 setup 方法 | ✓ | `setupUI / setupLayout / setupAction / setupStyle` |
+| `deinit` 结构正确 | ✓ | 含 removeObserver + debugPrint |
+| 懒加载使用 `it` 变量名 | ✓ | 所有闭包内临时对象均用 `it` |
+| MARK 使用中文 | ✓ | 生命周期 / 设置 / 按钮事件 / 私有方法 |
+| 主题颜色使用 `theme_` 前缀 | ✓ | backgroundColor / textColor / tintColor |
+| `blackTheme15` 颜色常量 | ✓ | 存在于 MSThemeHelper，light: `#00000026` / dark: `#FFFFFF26` |
+| `mainColor` / `mainEnableColor` 颜色常量 | ✓ | 存在于 MSThemeHelper，light: `#1DCE9F` / `#1DCE9F80` |
+| SnapKit 使用 `leading/trailing` | ✓ | 无 `left/right` 使用 |
+| SnapKit 约束顺序 top→leading→trailing→center→width→height | ✓ | 所有约束均符合 |
+| 约束数值使用 `~` 后缀 | ✓ | 如 `offset(48~)`、`inset(24~)` |
+| 网络请求使用 `[weak self]` | ✓ | |
+| `guard let self` 写法正确 | ✓ | `guard let 'self' = self else { return }` |
+| HUD 在回调首行隐藏 | ✓ | `hiddenHUDIndicatorAtCenter()` 在 guard entity 之前执行 |
+| 路由跳转使用 `OPNewRouterManager` | ✓ | `opay://` scheme |
 
 ---
 
-### Q-02 SnapKit 约束缺少优先级 `~` 🟡
+## 3. 问题清单
 
-**规范**：所有带具体数字的约束统一添加 `~`
+### Q-01 【严重】`infoLabel` 未声明 — 编译错误
 
-**问题约束（涉及行：58, 64, 65, 71, 77, 83, 89, 95, 101, 102, 107, 108, 115, 116, 117, 118）**：
+**位置**：第 130 行
+
 ```swift
-// ❌ 缺少 ~
-make.top.equalTo(view.safeAreaLayoutGuide).offset(48)
-make.width.height.equalTo(80)
-make.height.equalTo(52)
-make.width.equalTo(40)
-make.width.equalTo(1)
-make.height.equalTo(20)
-// ... 等所有带具体数字的约束
-```
-
-**修正示例**：
-```swift
-// ✅ 添加 ~ 优先级
-make.top.equalTo(view.safeAreaLayoutGuide).offset(48) ~ .required
-make.width.height.equalTo(80) ~ .required
-make.height.equalTo(52) ~ .required
-```
-
----
-
-### Q-03 缺失主题颜色定义 🟡
-
-**颜色**：`#098793`（浅色）/ 暗黑值待定
-
-**当前处理**（第 134 行）：
-```swift
+// setupStyle() 中：
 infoLabel.theme_backgroundColor = ThemeColorPicker(colors: "#098793", "#098793")
-// ⚠️ 暗黑色与浅色相同，暗黑适配值未确定
 ```
 
-**建议**：在 `MSThemeHelper.swift` 中补充语义化颜色常量：
-```swift
-// 待确认暗黑色值后补充
-public static let infoHighlightColor: MSThemeColor = MSThemeColor("#098793", "<暗黑色值>")
-```
+**问题**：`infoLabel` 在整个文件中未声明（懒加载 extension 无此属性），且未在 `setupUI()` 中添加到视图层级，会导致编译失败。
 
-然后替换：
+**修复方案**：
+1. 在懒加载 extension 中声明 `infoLabel`
+2. 在 `setupUI()` 中添加：`view.addSubview(infoLabel)`
+3. 在 `setupLayout()` 中补充约束
+
+---
+
+### Q-02 【低】`// MARK: - 懒加载` 建议改为 `// MARK: - 属性`
+
+**位置**：第 196 行
+
+**问题**：编码规范中的 MARK 分组示例使用 `属性` 而非 `懒加载`，建议与规范保持一致。
+
+**修复方案**：
+
 ```swift
-infoLabel.theme_backgroundColor = MSThemeHelper.infoHighlightColor
+// MARK: - 属性
 ```
 
 ---
 
-### Q-04 MARK 格式问题 🟢
+### Q-03 【低】UserDefaults key 硬编码字符串
 
-**问题**（第 18 行）：
+**位置**：第 159–160 行
+
 ```swift
-// MARK: - 生命周期-----  ❌ 多余的 -----
+UserDefaults.standard.set(entity.token, forKey: "opb_login_token")
+UserDefaults.standard.set(entity.userId, forKey: "opb_login_userId")
 ```
 
-**修正**：
+**问题**：key 值散落在业务代码中，维护困难且易拼写错误。若 key 需加入 logout 白名单（`OPBLoginKit+cache.__clearCache()`），硬编码更难追踪。
+
+**修复方案**：
+
 ```swift
-// MARK: - 生命周期  ✅
-```
-
----
-
-### Q-05 网络请求写法 🟢
-
-**问题**（第 156 行）：
-```swift
-self.view.hiddenHUDIndicatorAtCenter()  // ❌ 多余的 self
-```
-
-**修正**：
-```swift
-view.hiddenHUDIndicatorAtCenter()  // ✅
+private enum UserDefaultsKey {
+    static let loginToken = "opb_login_token"
+    static let loginUserId = "opb_login_userId"
+}
 ```
 
 ---
 
-### Q-06 类名后缀规范 🟢
+## 4. 颜色缺失记录
 
-**规范**：ViewController 类名应使用 `VC` 后缀
-
-**当前**：`OPBMainViewController`
-
-**规范建议**：`OPBMainVC`
-
-> 注：若项目已统一使用 `ViewController` 后缀，可保持现有风格，但新建文件应遵循 `VC` 后缀规范。
+| 文件 | 颜色值 | 使用位置 | 说明 |
+|------|--------|----------|------|
+| `OPBMainViewController.swift` | `#098793 / #098793` | `setupStyle():130` | `infoLabel` 背景色，两端同色；暗黑值待定，已在文件顶部 TODO 中标注 |
 
 ---
 
-## 4. 规范通过项 ✅
+## 5. 总结
 
-| 检查项 | 状态 |
-|--------|------|
-| OPB 文件前缀 | ✅ 通过 |
-| 继承 `OPBUIViewController` | ✅ 通过 |
-| 实现 `setupUI/setupLayout/setupAction/setupStyle` | ✅ 通过 |
-| `deinit` 结构完整 | ✅ 通过 |
-| MARK 注释使用中文 | ✅ 通过 |
-| 懒加载变量在 `viewDidLoad()` 后声明 | ✅ 通过 |
-| 懒加载闭包内临时对象使用 `it` | ✅ 通过 |
-| 无 `_` 前缀变量/方法 | ✅ 通过 |
-| SnapKit 使用 `leading/trailing`（无 `left/right`） | ✅ 通过 |
-| SnapKit 约束顺序（top→leading→trailing→center→width→height） | ✅ 通过 |
-| 主题颜色使用 `theme_` 前缀 | ✅ 通过 |
-| 网络请求使用 `[weak self]` | ✅ 通过 |
-| 未找到颜色使用 `ThemeColorPicker` inline 并标注 TODO | ✅ 通过 |
+| 类别 | 数量 |
+|------|------|
+| 严重（编译错误） | 1 |
+| 低（建议优化） | 2 |
+| 通过 | 16 |
+
+**主要阻塞项**：Q-01 `infoLabel` 未声明将导致编译失败，需优先处理。
 
 ---
 
-## 5. 未找到的主题颜色
+## 附录
 
-| 文件位置 | 颜色值 | 说明 |
-|----------|--------|------|
-| `viewcontroller/OPBMainViewController.swift:134` | `#098793` | infoLabel 背景色，暗黑值未定，暂两端使用同一值 |
-
----
-
-## 附录 - 变更历史
-
+### 变更历史
 | 版本 | 日期 | 说明 |
 |------|------|------|
-| v1.0 | 2026-06-16 | 初版代码评审 |
+| v1.0 | 2026-06-16 | 初版 |
+| v2.0 | 2026-06-16 | 修正 Q-02/Q-03 误报（blackTheme15、mainColor、mainEnableColor 均存在于颜色常量表） |
