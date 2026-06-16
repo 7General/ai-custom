@@ -27,11 +27,11 @@
 ## 技能包结构
 
 skills/
-├── multica-design/                # 设计阶段
-├── z-code-skill/                  # 编码阶段
+├── multica-design/                   # 设计阶段
+├── z-code-skill/                          # 编码阶段
 ├── consistency-check/             # 代码-设计一致性验证
-├── harness-testing/               # 测试阶段（按需）
-└── harness-quality/               # 质量阶段
+├── harness-testing/                  # 测试阶段（按需）
+└── harness-quality/                  # 质量阶段
 
 
 
@@ -252,5 +252,7 @@ AI：[触发z-code-skill]
 - **版本**: 1.1.0
 - **发布日期**: 2026-06-01
 - **更新内容**: 增加代码-设计一致性验证功能
+
+---
 
 
