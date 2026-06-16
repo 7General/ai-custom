@@ -25,14 +25,14 @@
 - 设计功能到代码行号的映射
 
 ## 技能包结构
-
+```
 skills/
 ├── multica-design/                   # 设计阶段
 ├── z-code-skill/                          # 编码阶段
 ├── consistency-check/             # 代码-设计一致性验证
 ├── harness-testing/                  # 测试阶段（按需）
 └── harness-quality/                  # 质量阶段
-
+```
 
 
 ## 快速开始
