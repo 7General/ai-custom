@@ -24,7 +24,7 @@ public class OPBMainViewController: OPBUIViewController {
         setupAction()
         setupStyle()
     }
-    var infoLabel = UILabel()
+
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -48,75 +48,71 @@ extension OPBMainViewController {
         passwordContainerView.addSubview(togglePasswordButton)
         view.addSubview(loginButton)
         view.addSubview(forgotPasswordButton)
-        view.addSubview(infoLabel)
+
     }
 
     func setupLayout() {
         logoImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(48)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(48~)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(80)
+            make.width.height.equalTo(80~)
         }
 
         phoneContainerView.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(40)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(52)
+            make.top.equalTo(logoImageView.snp.bottom).offset(40~)
+            make.leading.trailing.equalToSuperview().inset(24~)
+            make.height.equalTo(52~)
         }
 
         areaCodeLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(16~)
             make.centerY.equalToSuperview()
-            make.width.equalTo(40)
+            make.width.equalTo(40~)
         }
 
         phoneSeparatorView.snp.makeConstraints { make in
-            make.leading.equalTo(areaCodeLabel.snp.trailing).offset(8)
+            make.leading.equalTo(areaCodeLabel.snp.trailing).offset(8~)
             make.centerY.equalToSuperview()
-            make.width.equalTo(1)
-            make.height.equalTo(20)
+            make.width.equalTo(1~)
+            make.height.equalTo(20~)
         }
 
         phoneTextField.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.leading.equalTo(phoneSeparatorView.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().inset(16)
+            make.leading.equalTo(phoneSeparatorView.snp.trailing).offset(8~)
+            make.trailing.equalToSuperview().inset(16~)
         }
 
         passwordContainerView.snp.makeConstraints { make in
-            make.top.equalTo(phoneContainerView.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(52)
+            make.top.equalTo(phoneContainerView.snp.bottom).offset(16~)
+            make.leading.trailing.equalToSuperview().inset(24~)
+            make.height.equalTo(52~)
         }
 
         passwordTextField.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalTo(togglePasswordButton.snp.leading).offset(-8)
+            make.leading.equalToSuperview().offset(16~)
+            make.trailing.equalTo(togglePasswordButton.snp.leading).offset(-8~)
         }
 
         togglePasswordButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16~)
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(24)
+            make.width.height.equalTo(24~)
         }
 
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordContainerView.snp.bottom).offset(32)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(52)
+            make.top.equalTo(passwordContainerView.snp.bottom).offset(32~)
+            make.leading.trailing.equalToSuperview().inset(24~)
+            make.height.equalTo(52~)
         }
 
         forgotPasswordButton.snp.makeConstraints { make in
-            make.top.equalTo(loginButton.snp.bottom).offset(16)
+            make.top.equalTo(loginButton.snp.bottom).offset(16~)
             make.centerX.equalToSuperview()
         }
 
-        infoLabel.snp.makeConstraints { make in
-            make.top.equalTo(forgotPasswordButton.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(24)
-            make.height.equalTo(40)
-        }
+        
     }
 
     func setupAction() {
@@ -219,7 +215,7 @@ extension OPBMainViewController {
         let it = UILabel()
         it.text = "+86"
         it.font = UIFont.systemFont(ofSize: 16)
-        it.theme_textColor = MSThemeHelper.blackTheme101
+        it.theme_textColor = MSThemeHelper.blackTheme65
         it.textAlignment = .center
         return it
     }()
