@@ -241,4 +241,4 @@ class MyViewController: UIViewController {
 - [ ] 每个约束是否单独一行
 - [ ] 是否使用 `equalToSuperview()` 而不是 `equalTo(view)`
 - [ ] `updateConstraints` 中的约束是否在 `makeConstraints` 中设置过
-- [ ] 所有的约束带具体数字的统一添加`~`
+- [ ] 所有约束中的具体数字后面统一添加 `~`，例如 `offset(12~)`、`inset(24~)`、`equalTo(52~)`
