@@ -1,8 +1,8 @@
 # OPBMainViewController - 代码评审简报
 
 ## 文档信息
-- 版本：v2.0
-- 日期：2026-06-16
+- 版本：v5.0
+- 日期：2026-06-17
 
 ## 1. 概述
 
@@ -96,6 +96,36 @@ private enum UserDefaultsKey {
 
 ---
 
+### Q-04 【中】网络请求 `error` 参数未处理
+
+**位置**：第 150 行
+
+```swift
+OPBNetworkManager.shared.start(request) { [weak self] request, data, error in
+    guard let `self` = self else { return }
+    self.view.hiddenHUDIndicatorAtCenter()
+    // error 参数被完全忽略
+```
+
+**问题**：当网络层返回 `error`（如超时、无网络）时，`error != nil` 但 `data` 为 nil，`jsonToModel` 返回 nil，走 `guard` 的 `return` 分支，用户看不到任何错误提示，体验差。
+
+**修复方案**：
+
+```swift
+OPBNetworkManager.shared.start(request) { [weak self] request, data, error in
+    guard let `self` = self else { return }
+    self.view.hiddenHUDIndicatorAtCenter()
+
+    if let error = error {
+        self.view.showHUDText(error.localizedDescription)
+        return
+    }
+    // ... 后续 entity 解析
+}
+```
+
+---
+
 ## 4. 颜色缺失记录
 
 | 文件 | 颜色值 | 使用位置 | 说明 |
@@ -104,11 +134,50 @@ private enum UserDefaultsKey {
 
 ---
 
-## 5. 总结
+## 5. 代码评审清单
+
+> `[✓]` = 通过　`[ ]` = 未通过
+
+### 功能正确性
+
+- [✓] 代码实现了需求
+- [✓] 边界情况已处理
+- [ ] 错误处理完整（网络层 error 未处理，见 Q-04）
+- [ ] 无潜在 bug（infoLabel 未声明，编译失败，见 Q-01）
+
+### 代码质量
+
+- [✓] 代码易于理解
+- [✓] 命名清晰
+- [✓] 无重复代码
+- [✓] 函数长度合理
+- [ ] 注释充分（logoImageView TODO 未替换，infoLabel 用途不明）
+
+### 性能
+
+- [✓] 无性能问题
+- [✓] 无不必要的循环
+- [✓] 无内存泄漏风险
+
+### Swift 专项检查
+
+- [✓] 无强制解包（!）
+- [✓] weak self 使用正确
+- [✓] 无循环引用
+- [✓] guard 使用合理
+- [✓] 遵循单一职责原则
+- [✓] Protocol 抽象依赖（VC 层 N/A）
+- [✓] 符合 Swift Concurrency 最佳实践
+- [✓] 无主线程阻塞
+
+---
+
+## 6. 总结
 
 | 类别 | 数量 |
 |------|------|
 | 严重（编译错误） | 1 |
+| 中（体验缺陷） | 1 |
 | 低（建议优化） | 2 |
 | 通过 | 16 |
 
@@ -123,3 +192,7 @@ private enum UserDefaultsKey {
 |------|------|------|
 | v1.0 | 2026-06-16 | 初版 |
 | v2.0 | 2026-06-16 | 修正 Q-02/Q-03 误报（blackTheme15、mainColor、mainEnableColor 均存在于颜色常量表） |
+| v2.1 | 2026-06-17 | 复查确认：三项问题均仍未修复，Q-01 编译错误为首要阻塞 |
+| v3.0 | 2026-06-17 | z代码检查复审：Q-01/Q-02/Q-03 均未修复，状态维持不变 |
+| v4.0 | 2026-06-17 | 补充代码评审清单章节（含勾选状态），新增 Q-04 网络 error 未处理 |
+| v5.0 | 2026-06-17 | 复查确认 Q-01/02/03 均未修复；补充 Q-04 详细描述到问题清单 |
