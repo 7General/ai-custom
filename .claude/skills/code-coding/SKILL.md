@@ -1,5 +1,5 @@
 ---
-name: z-code-skill
+name: code-coding
 description: 编码阶段Skill - 管理代码实现编写。包含代码框架搭建、核心功能实现、代码规范、代码评审。触发关键词：开始编码、编码实现、代码评审、代码检查、代码质量、z代码检查
 ---
 

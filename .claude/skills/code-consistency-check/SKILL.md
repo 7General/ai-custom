@@ -1,5 +1,5 @@
 ---
-name: consistency-check
+name: code-consistency-check
 description: 编码完成后检查生成的代码、功能、设计对应关系、代码真实方面的一致性检查，并成成详细检查简报。触发关键词：检查一致性、设计一致性、代码验证、一致性检查、code-verify
 ---
 
