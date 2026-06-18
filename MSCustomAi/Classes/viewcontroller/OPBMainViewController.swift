@@ -5,9 +5,6 @@
 //  Created by huizhou.wang on 2026/06/09.
 //
 
-// [TODO-Color] 缺少语义化颜色：浅色 #098793 / 暗黑 待定
-// 建议在 MSThemeHelper 中补充：
-// public static let xxx : MSThemeColor = MSThemeColor("#098793", "#098793")
 
 import UIKit
 import SnapKit
@@ -37,7 +34,7 @@ public class OPBMainViewController: OPBUIViewController {
 
 extension OPBMainViewController {
 
-    func setupUI() {
+    private func setupUI() {
         view.addSubview(logoImageView)
         view.addSubview(phoneContainerView)
         phoneContainerView.addSubview(areaCodeLabel)
@@ -51,7 +48,7 @@ extension OPBMainViewController {
 
     }
 
-    func setupLayout() {
+    private func setupLayout() {
         logoImageView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(48~)
             make.centerX.equalToSuperview()
@@ -115,7 +112,7 @@ extension OPBMainViewController {
         
     }
 
-    func setupAction() {
+    private func setupAction() {
         phoneTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
@@ -123,11 +120,11 @@ extension OPBMainViewController {
         togglePasswordButton.addTarget(self, action: #selector(didTapTogglePassword), for: .touchUpInside)
     }
 
-    func setupStyle() {
+    private func setupStyle() {
         view.theme_backgroundColor = MSThemeHelper.mainBackColor
         phoneContainerView.theme_backgroundColor = MSThemeHelper.mainWhiteTheme
         passwordContainerView.theme_backgroundColor = MSThemeHelper.mainWhiteTheme
-        infoLabel.theme_backgroundColor = ThemeColorPicker(colors: "#098793", "#098793")
+        
         updateLoginButtonState()
     }
 
