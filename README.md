@@ -27,11 +27,11 @@
 ## 技能包结构
 ```
 skills/
-├── multica-design/                   # 设计阶段
-├── z-code-skill/                     # 编码阶段
-├── consistency-check/                # 代码-设计一致性验证
-├── harness-testing/                  # 测试阶段（按需）
-└── harness-quality/                  # 质量阶段
+├── code-design/                   # 设计阶段
+├── code-coding/                   # 编码阶段
+├── code-consistency-check/        # 代码-设计一致性验证
+├── code-testing/                  # 测试阶段（按需）
+└── code-quality/                  # 质量阶段
 ```
 
 
@@ -41,7 +41,7 @@ skills/
 
 用户：我要开发一个用户认证功能
 
-AI：[触发multica-design]
+AI：[触发code-design]
 已启动工程开发模式，开始用户认证功能开发流程：
 
 📋 阶段1：需求与设计
@@ -61,7 +61,7 @@ AI：[触发multica-design]
 4. 代码检查文档 `docs/code/{feature}-code-review.md`
 
 
-[自动调用z-code-skill]
+[自动调用code-codeing]
 
 ✓ 阶段3：设计一致性验证
 
@@ -72,7 +72,7 @@ AI：[触发multica-design]
 5. 一致性文档`docs/code/{feature}-consistency-check.md`
 
 
-[自动调用consistency-check]
+[自动调用code-consistency-check]
 
 🔬 阶段4：测试验证
 
@@ -80,7 +80,7 @@ AI：[触发multica-design]
 2. 集成测试执行
 3. 覆盖率分析
 
-[自动调用harness-test skill]（待定）
+[自动调用code-test skill]（待定）
 
 🚀 阶段5：构建部署
 
@@ -88,7 +88,7 @@ AI：[触发multica-design]
 2. 环境部署
 3. 发布验证
 
-[自动调用harness-deploy skill]（待定）
+[自动调用code-deploy skill]（待定）
 
 ✅ 开发完成！
 
@@ -98,7 +98,7 @@ AI：[触发multica-design]
 
 用户：检查当前代码质量
 
-AI：[触发z-code-skill]
+AI：[触发code-codeing]
 正在执行质量检查流程：
 
 ✓ 代码规范检查
@@ -116,7 +116,7 @@ AI：[触发z-code-skill]
 
 ## 子技能详解
 
-### 1. multica-design（设计阶段）
+### 1. code-design（设计阶段）
 
 **职责**：管理软件工程的需求分析与技术设计阶段
 
@@ -137,7 +137,7 @@ AI：[触发z-code-skill]
 - API接口定义
 - 数据模型图
 
-### 2. z-code-skill（编码阶段）
+### 2. code-coding（编码阶段）
 
 **职责**：管理代码实现和单元测试编写
 
@@ -158,7 +158,7 @@ AI：[触发z-code-skill]
 - 代码评审记录
 - 代码-设计一致性报告
 
-### 3. consistency-check（一致性验证）
+### 3. code-consistency-check（一致性验证）
 
 **职责**：检查生成的代码是否与设计文档内容一致
 
@@ -178,7 +178,7 @@ AI：[触发z-code-skill]
 - 功能映射清单
 - 问题修复建议
 
-### 4. harness-testing（测试阶段）（待定）
+### 4. code-testing（测试阶段）（待定）
 
 **职责**：管理软件测试流程和质量验证
 
