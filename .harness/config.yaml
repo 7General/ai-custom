@@ -1,60 +1,52 @@
-# Harness 工程开发流程配置
-# AI 在每个阶段结束时读取此文件，决定下一步操作
+# 工程开发模式配置文件
+# 版本: 1.0.0
 
-harness:
-  project: MSCustomAi
+# 项目基本信息
+project:
+  name: MSCustomAi
   version: 1.0.0
-
-  # ──────────────────────────────────────────
-  # 阶段流转路由表
-  # 每个阶段完成后，AI 读取对应节点的配置决定下一步
-  # ──────────────────────────────────────────
+  description: 项目描述
+  language: swift、object-c  # python, java, javascript, go, etc.
+  
+  # 阶段配置
   stages:
-
-    # 阶段1：需求与设计
-    design:
-      on_complete:
-        next: coding          # 完成后进入编码阶段
-        auto: false           # false = 告知用户后等待确认
-
-    # 阶段2：编码实现
-    coding:
-      on_complete:
-        next: consistency_check   # 编码完成后自动触发一致性检查
-        auto: true                # true = 自动执行，无需用户确认
-
-    # 阶段2.5：一致性验证
-    consistency_check:
-      threshold: 90             # 一致率低于90%视为不通过
-      on_pass:
-        next: quality_check     # 通过后进入质量检查
+    # 设计阶段
+    - stage: code-design
+      config:
+        auto: false   # 需要人工审核后确认
+        next: code-coding
+    
+    # 编码阶段
+    - stage: code-coding
+      config:
         auto: true
-      on_fail:
-        next: coding            # 不通过回到编码阶段修复
-        auto: false
-        message: "一致性验证未通过，请修复后重新提交"
-
-    # 阶段4：质量检查
-    quality_check:
-      threshold: 85             # 质量分低于85分视为不通过
-      on_pass:
-        next: commit            # 通过后进入提交代码
-        auto: true              # 自动执行 acp
-      on_fail:
-        next: null              # 不进入下一步
-        auto: false
-        message: "质量检查未通过，请修复问题后重新检查"
-
-    # 提交代码
-    commit:
-      on_complete:
-        next: null              # 提交后流程结束，等待用户指令
-        auto: false
-        message: "代码已提交，请确认是否需要部署"
-
-    # 阶段5：部署（按需）
-    deploy:
-      on_complete:
+        next: code-consistency-check
+    
+    # 一致性验证阶段
+    - stage: code-consistency-check
+      config:
+        # 综合检测得分
+        threshold: 85
+        on_pass:
+          next: code-quality
+        on_fail:
+          next: code-coding
+          message: "一致性验证未通过（< 85%），请修复后重新提交"
+    
+    # 质量阶段
+    - stage: code-quality
+      config:
+        # 综合检测得分
+        threshold: 85
+        on_pass:
+          next: my-git-skill
+        on_fail:
+          next: null
+          message: "质量检查未通过（< 85分），请修复后重新检查"
+    
+    # 提交阶段
+    - stage: my-git-skill
+      config:
+        auto: true
         next: null
-        auto: false
-        message: "部署完成，流程结束"
+        message: "代码已提交"
