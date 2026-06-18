@@ -60,6 +60,7 @@ allowed-tools:
    
    OPBNetworkManager.shared.start(request) {[weak self] request, data, error in
       guard let `self` = self else { return }
+      // 关闭HUD
       view.hiddenHUDIndicatorAtCenter()
       
       guard let entity = [`响应的实体对象`].jsonToModel(data as Any, modelType: OPBQRBindEntity.self) as? OPBQRBindEntity  else {
