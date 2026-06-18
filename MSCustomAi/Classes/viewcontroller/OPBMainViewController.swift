@@ -35,7 +35,7 @@ public class OPBMainViewController: OPBUIViewController {
 extension OPBMainViewController {
 
     private func setupUI() {
-        view.addSubview(logoImageView)
+
         view.addSubview(phoneContainerView)
         phoneContainerView.addSubview(areaCodeLabel)
         phoneContainerView.addSubview(phoneSeparatorView)
@@ -49,14 +49,10 @@ extension OPBMainViewController {
     }
 
     private func setupLayout() {
-        logoImageView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(48~)
-            make.centerX.equalToSuperview()
-            make.width.height.equalTo(80~)
-        }
+        
 
         phoneContainerView.snp.makeConstraints { make in
-            make.top.equalTo(logoImageView.snp.bottom).offset(40~)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(48~)
             make.leading.trailing.equalToSuperview().inset(24~)
             make.height.equalTo(52~)
         }
@@ -194,16 +190,9 @@ extension OPBMainViewController {
 
 extension OPBMainViewController {
 
-    private lazy var logoImageView: UIImageView = {
-        let it = UIImageView()
-        it.contentMode = .scaleAspectFit
-        // TODO: 替换为实际 Logo 图片名
-        return it
-    }()
-
     private lazy var phoneContainerView: UIView = {
         let it = UIView()
-        it.layer.cornerRadius = 8
+        it.layer.cornerRadius = 4
         it.clipsToBounds = true
         return it
     }()
