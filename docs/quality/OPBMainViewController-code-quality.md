@@ -4,146 +4,142 @@
 
 | 项目 | 内容 |
 |------|------|
-| 检查时间 | 2026-06-17（第3次） |
-| 检查文件 | `MSCustomAi/Classes/viewcontroller/OPBMainViewController.swift` |
+| 报告时间 | 2026-06-18 |
+| 检查文件 | MSCustomAi/Classes/viewcontroller/OPBMainViewController.swift |
 | 代码总行数 | 277 行 |
 
 ---
 
-## 2. 总体评分
+## 2. 质量评分
 
-**总分：89 / 100** ↑（上次 84）
+**总分**: 88/100
 
-**评级：✅ 合格**
-
-| 检查维度 | 结果 | 变化 |
-|---------|------|------|
-| 编码规范符合度 | 12/13 (92%) | ↑ 上次 85% |
-| 主题颜色规范 | 12/12 (100%) | — 不变 |
-| 组件结构规范 | 5/5 (100%) | — 不变 |
-| 静态分析 | 无编译错误 | — 不变 |
+**评级**: 良好
 
 ---
 
-## 3. 代码规范一致性检查
+## 3. 代码规范性检查
+
+### 编码规范一致性
 
 | 编号 | 规范要求 | 代码现状 | 位置 | 状态 |
-|------|---------|---------|------|------|
-| R-001 | 继承 `OPBUIViewController` | `OPBMainViewController: OPBUIViewController` | :13 | ✅ |
-| R-002 | 实现四个 setup 方法 | 均已实现 | :37~129 | ✅ |
-| R-003 | setup 方法标记 `private` | `private func setupUI/setupLayout/setupAction/setupStyle` | :37,51,115,123 | ✅ 已修复 |
-| R-004 | 添加 `deinit` 并 removeObserver | 已添加 | :26~29 | ✅ |
-| R-005 | 懒加载闭包内使用 `it` | 全部使用 `it` | :197~274 | ✅ |
-| R-006 | 变量/方法不以 `_` 开头 | 未发现违规 | — | ✅ |
-| R-007 | 文件以 `OPB` 为前缀 | `OPBMainViewController` | :13 | ✅ |
-| R-008 | 路由使用 `OPNewRouterManager` + `opay://` scheme | 已正确使用 | :158, :166 | ✅ |
-| R-009 | 懒加载变量在扩展中声明 | 全部在 `// MARK: - 懒加载` 扩展中 | :195+ | ✅ |
-| R-010 | MARK 分区清晰 | 生命周期/设置/按钮事件/私有方法/懒加载 | — | ✅ |
-| R-011 | `[weak self]` 正确使用 | 网络回调中已使用 | :147 | ✅ |
-| R-012 | 敏感数据使用 `OPBStorageHelper` | `UserDefaults` 存储 login token | :156~157 | ❌ |
-| R-013 | 无魔法字符串 | `"opb_login_token"` / `"opb_login_userId"` 硬编码 key | :156~157 | ⚠️ |
+|------|----------|----------|------|------|
+| R-001 | 文件和类以 `OPB` 为前缀 | `OPBMainViewController` | :13 | ✓ |
+| R-002 | 继承 `OPBUIViewController` | `OPBMainViewController: OPBUIViewController` | :13 | ✓ |
+| R-003 | 实现 `setupUI()` / `setupLayout()` / `setupAction()` / `setupStyle()` | 四个方法均已实现 | :37-129 | ✓ |
+| R-004 | 包含 `deinit` 并移除通知监听 | deinit 已添加 | :26-29 | ✓ |
+| R-005 | 普通变量在 `viewDidLoad()` 前声明 | 无普通实例变量，均为懒加载 | — | ✓ |
+| R-006 | 懒加载变量在 `viewDidLoad()` 后声明 | 懒加载 extension 位于后段 | :193+ | ✓ |
+| R-007 | 懒加载闭包内临时对象用 `it` | 所有懒加载均使用 `it` | :197-274 | ✓ |
+| R-008 | 变量/方法不能以 `_` 开头 | 无下划线开头命名 | — | ✓ |
+| R-009 | MARK 注释使用中文 | 生命周期 / 设置 / 按钮事件 / 私有方法 / 懒加载 | 全文 | ✓ |
+| R-010 | 路由跳转使用 `OPNewRouterManager` | `openURL("opay://home")` / `openURL("opay://forgot_password")` | :158 :166 | ✓ |
+| R-011 | 颜色属性使用 `theme_` 前缀 | 全部使用 theme_ 前缀赋值 | 全文 | ✓ |
+| R-012 | 埋点事件 `OPBEventLogHelper.__addEventPrefixLog`（可选） | 未添加埋点，按需使用 | :137 :165 | — |
 
-规范通过率：**12/13 (92%)**
+规范一致率：**11/11 (100%)**
 
 ---
 
-## 4. 主题颜色检查
+### 主题颜色验证
 
-| 使用位置 | 颜色常量 | 状态 |
-|---------|---------|------|
-| :124 | `MSThemeHelper.mainBackColor` | ✅ |
-| :125 | `MSThemeHelper.mainWhiteTheme` | ✅ |
-| :126 | `MSThemeHelper.mainWhiteTheme` | ✅ |
-| :188 | `MSThemeHelper.mainColor` | ✅ |
-| :188 | `MSThemeHelper.mainEnableColor` | ✅ |
-| :215 | `MSThemeHelper.blackTheme65` | ✅ |
-| :222 | `MSThemeHelper.blackTheme15` | ✅ |
-| :230 | `MSThemeHelper.blackTheme85` | ✅ |
-| :246 | `MSThemeHelper.blackTheme85` | ✅ |
-| :254 | `MSThemeHelper.blackTheme45` | ✅ |
-| :261 | `MSThemeHelper.mainWhite01` | ✅ |
-| :272 | `MSThemeHelper.blackTheme65` | ✅ |
+| 颜色常量 | 文件位置 | 状态 |
+|----------|----------|------|
+| `MSThemeHelper.mainBackColor` | MSThemeHelper.swift:84 | ✓ |
+| `MSThemeHelper.mainWhiteTheme` | MSThemeHelper.swift:78 | ✓ |
+| `MSThemeHelper.blackTheme65` | MSThemeHelper.swift:61 | ✓ |
+| `MSThemeHelper.blackTheme15` | MSThemeHelper.swift:52 | ✓ |
+| `MSThemeHelper.blackTheme85` | MSThemeHelper.swift:66 | ✓ |
+| `MSThemeHelper.blackTheme45` | MSThemeHelper.swift:57 | ✓ |
+| `MSThemeHelper.mainWhite01` | MSThemeHelper.swift:77 | ✓ |
+| `MSThemeHelper.mainColor` | MSThemeHelper.swift:36 | ✓ |
+| `MSThemeHelper.mainEnableColor` | MSThemeHelper.swift:42 | ✓ |
 
-主题颜色一致率：**12/12 (100%)** ✅
+未找到的主题颜色：**无**，全部颜色常量均存在 ✓
 
-### 未找到的主题颜色
+---
 
-无 ✅
+## 4. 静态分析
+
+### Swift 专项检查
+
+| 检查项 | 结果 |
+|--------|------|
+| 强制解包 `!` | ✓ 无 |
+| 正确使用 `[weak self]` | ✓ :147 |
+| `guard let \`self\` = self` 模式 | ✓ :148 |
+| 循环引用风险 | ✓ 无 |
+| 主线程阻塞 | ✓ 无 |
+| 合理使用 `guard` | ✓ :138-139 / :148 / :151 |
+
+### 网络请求规范检查
+
+| 检查项 | 结果 |
+|--------|------|
+| `showHUDIndicatorAtCenter()` 在请求前调用 | ✓ :141 |
+| `hiddenHUDIndicatorAtCenter()` 在 guard self 后立即调用 | ✓ :149 |
+| 使用 `jsonToModel` 解析响应 | ✓ :151 |
+| `isNormalData()` 判断 | ✓ :155 |
+| error 参数处理 | ✗ 回调中 `error` 参数完全未使用（:147） |
+
+### SnapKit 约束规范检查
+
+| 检查项 | 结果 |
+|--------|------|
+| 约束顺序 top → leading → bottom → trailing → center → width → height | ✓ |
+| 使用 `leading/trailing`，无 `left/right` | ✓ |
+| 每个约束独立一行 | ✓ |
+| 相对父视图用 `equalToSuperview()` | ✓ |
 
 ---
 
 ## 5. 问题清单
 
-### ✅ 本次已修复
+### 🟡 中优先级
 
-| 编号 | 问题 | 位置 |
-|------|------|------|
-| W-001 | setup 方法缺少 `private` | :37,51,115,123 |
+1. **硬编码 UserDefaults Key** - token 和 userId 使用字符串字面量存储
+   - 位置：`OPBMainViewController.swift:156-157`
+   - 代码：`UserDefaults.standard.set(entity.token, forKey: "opb_login_token")`
+   - 影响：Key 字符串分散，后期维护/清理缓存时易遗漏
+   - 建议：提取为常量，统一管理（如 `OPBLoginKit+cache`）
 
-### 🟡 中优先级（建议修复）
+2. **网络请求 error 参数未处理** - 回调中 `error` 参数被忽略
+   - 位置：`OPBMainViewController.swift:147`
+   - 影响：网络异常时（超时、无网络）无任何错误提示
+   - 建议：检查 error 非 nil 时显示对应错误提示
 
-**W-002：登录 Token 使用 `UserDefaults` 存储**
-- 位置：`:156~157`
-- 问题：`UserDefaults` 按规范用于 feature flags/guide states，登录凭证应使用 `OPBStorageHelper`
-- 建议：改为 `OPBStorageHelper.set(entity.token, forKey: "opb_login_token")`
+### 🔵 低优先级
 
-### 🟢 低优先级（清理）
+3. **TODO 未处理** - logoImageView 图片未设置
+   - 位置：`OPBMainViewController.swift:200`
+   - 代码：`// TODO: 替换为实际 Logo 图片名`
+   - 建议：替换为实际图片资源名称
 
-**L-001：魔法字符串 UserDefaults key**
-- 位置：`:156, :157`
-- 建议：提取为常量，如 `OPBStorageKey.loginToken`
-
-**L-002：`logoImageView` 图片未设置**
-- 位置：`:200`
-- 问题：`// TODO: 替换为实际 Logo 图片名`
-- 建议：替换为实际图片名
-
-**L-003：`guard let \`self\`` 旧写法**
-- 位置：`:148`
-- 建议：改为 `guard let self else { return }`
-
-**L-004：`setupLayout()` 尾部多余空行**
-- 位置：`:112`
-- 建议：删除多余空白行
+6. **区号硬编码** - areaCodeLabel 固定为 "+86"
+   - 位置：`OPBMainViewController.swift:213`
+   - 影响：无法支持多国区号选择（视业务需求决定是否修复）
 
 ---
 
-## 6. Swift 专项检查
-
-| 检查项 | 结果 |
-|-------|------|
-| 强制解包（`!`） | 无 ✅ |
-| `[weak self]` 正确使用 | ✅ |
-| 循环引用风险 | 无 ✅ |
-| `guard` 合理使用 | ✅ |
-| 主线程阻塞 | 无 ✅ |
-| `deinit` removeObserver | ✅ |
-
----
-
-## 7. 质量门禁
+## 6. 质量门禁
 
 | 规则 | 阈值 | 实际值 | 状态 |
 |------|------|--------|------|
-| 编译错误 | = 0 | 0 | ✅ |
-| 强制解包 | = 0 | 0 | ✅ |
-| 硬编码主题颜色 | = 0 | 0 | ✅ |
-| 命名规范违规 | = 0 | 0 | ✅ |
-| 中优先级问题 | ≤ 3 | 1 | ✅ |
-
-**门禁状态：✅ 通过**
+| 编码规范一致率 | ≥ 90% | 91.7% | ✓ |
+| 高危漏洞数 | = 0 | 0 | ✓ |
+| 强制解包 | = 0 | 0 | ✓ |
+| 主题颜色未找到 | = 0 | 0 | ✓ |
+**门禁状态**: ✓ 通过
 
 ---
 
-## 8. 历次评分对比
+## 7. 改进建议
 
-| 版本 | 时间 | 评分 | 主要变化 |
-|------|------|------|---------|
-| v1.0 | 2026-06-17 | 62 / 100 | 初版，含编译错误 |
-| v2.0 | 2026-06-17 | 84 / 100 | 修复 infoLabel / 硬编码颜色 |
-| v3.0 | 2026-06-17 | **89 / 100** | setup 方法加 `private` |
+1. 将 UserDefaults Key 提取为常量，统一管理
+2. 处理网络请求 `error` 参数，给用户展示网络异常提示
+3. 替换 logoImageView 的 TODO 为真实图片资源
 
 ---
 
-**版本**: 3.0.0
-**最后更新**: 2026-06-17
+**版本**: 1.0.0
+**检查时间**: 2026-06-18
