@@ -225,10 +225,10 @@ AI：正在评审代码...
 |编号| 类型 | 规范 | 示例 |文件|说明|
 |Q-01|------|------|------|xx/xx|xxx|
 |Q-02| 类名  | 大驼峰 | `UserService` |xx/xx|xxx|
-|Q-03| 函数名 | 小写下划线 | `get_user_by_id` |xx/xx|xxx|
-|Q-04| 变量名 | 小写下划线 | `user_count` |xx/xx|xxx|
-|Q-05| 常量 | 大写下划线 | `MAX_RETRY_COUNT` |xx/xx|xxx|
-|Q-06| 私有方法 | 单下划线前缀 | `_validate_input` |xx/xx|xxx|
+|Q-03| 函数名 | 小驼峰 | `getUserById()` |xx/xx|xxx|
+|Q-04| 变量名 | 小驼峰 | `userCount` |xx/xx|xxx|
+|Q-05| 常量 | 小驼峰 | `maxRetryCount` |xx/xx|xxx|
+|Q-06| 私有方法 | 小驼峰，禁止下划线前缀 | `validateInput()` |xx/xx|xxx|
 
 
 
