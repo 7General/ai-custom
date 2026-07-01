@@ -12,7 +12,10 @@ allowed-tools:
 - 优先使用约定式提交：
 ```txt
 <type>:[optional scope]
-<version>:先读取根目录 *.podspec 文件中的 s.version 字段作为版本号
+<version>:按以下优先级获取版本号：
+  1. 根目录存在 *.podspec 文件 → 读取 s.version 字段
+  2. 项目中存在 Info.plist 文件 → 读取 CFBundleShortVersionString 字段
+  3. 都不存在 → 省略 version 行
 ```
 - `type` 使用：`feat`、`fix`、`refactor`、`docs`、`test`、`chore`
 - 提交说明使用中文描述**变更目的**，专业术语保留英文
