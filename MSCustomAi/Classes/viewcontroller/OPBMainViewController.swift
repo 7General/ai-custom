@@ -192,7 +192,7 @@ extension OPBMainViewController {
 
     private lazy var phoneContainerView: UIView = {
         let it = UIView()
-        it.layer.cornerRadius = 4
+        it.layer.cornerRadius = 8
         it.clipsToBounds = true
         return it
     }()
