@@ -1,9 +1,6 @@
 ---
 name: my-git-skill
-description: 提交当前仓库代码,并生成可用的git commit message。触发关键词：提交代码、推送、push、acp、ACP
-allowed-tools:
-  - Read
-  - Glob
+description: 提交当前仓库代码,并生成可用的git commit message。触发关键词：提交代码、acp
 ---
 
 请基于当前仓库的变更，为即将执行的提交生成符合仓库约定的 commit message，并推送到远端。
