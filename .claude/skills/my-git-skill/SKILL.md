@@ -12,7 +12,7 @@ allowed-tools:
 - 优先使用约定式提交：
 ```txt
 <type>:[optional scope]
-<version>:按以下优先级获取版本号：
+<version>:<版本号> （按以下优先级获取版本号）
   1. 根目录存在 *.podspec 文件 → 读取 s.version 字段
   2. 项目中存在 Info.plist 文件 → 读取 CFBundleShortVersionString 字段
   3. 都不存在 → 省略 version 行
