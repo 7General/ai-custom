@@ -232,7 +232,7 @@ class MyViewController: UIViewController {
 }
 ```
 
-## 检查清单
+## 检查清单 
 
 写完 SnapKit 约束后，检查以下项目：
 
