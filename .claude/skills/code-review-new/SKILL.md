@@ -1,5 +1,5 @@
 ---
-name: code-review_new
+name: code-review-new
 description: 代码审查，检查编码规范、设计一致性、代码质量。触发关键词：代码质量、质量检查、review、cr、一致性检查、code-verify
 ---
 

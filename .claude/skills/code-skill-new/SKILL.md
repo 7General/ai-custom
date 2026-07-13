@@ -1,5 +1,5 @@
 ---
-name: code-skill_new
+name: code-skill-new
 description: iOS编码技能。触发关键词：编码、写代码、编码实现
 ---
 
